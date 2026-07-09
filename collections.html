@@ -447,6 +447,91 @@
     .capsule-heading{ padding:3rem 1.8rem 2rem; }
   }
 
+  /* ---------- VIDEO INSERT ÉTÉ (variante chaude) ---------- */
+  .video-insert-ete{
+    max-width:1500px;
+    margin:0 auto;
+    padding:0 5.5rem 5rem;
+  }
+
+  .video-insert-ete .video-frame{
+    position:relative;
+    aspect-ratio:16/9;
+    overflow:hidden;
+    background:#3a2f22;
+  }
+
+  .video-insert-ete .video-frame video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    filter:saturate(1.05) contrast(1.02) brightness(1.03);
+  }
+
+  .video-insert-ete .video-frame::after{
+    content:'';
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(58,47,34,0.05) 0%, rgba(58,47,34,0.4) 100%);
+    pointer-events:none;
+  }
+
+  .video-insert-ete .video-code{
+    position:absolute; top:1.2rem; left:1.2rem;
+    font-family:var(--font-mono);
+    font-size:0.7rem;
+    letter-spacing:1px;
+    color:var(--bone);
+    background:rgba(58,47,34,0.55);
+    padding:0.35rem 0.75rem;
+    z-index:2;
+    display:flex;
+    align-items:center;
+    gap:0.5rem;
+  }
+
+  .video-insert-ete .rec-dot{
+    background:#9C6B3A;
+  }
+
+  .video-insert-ete .video-caption{
+    position:absolute; bottom:1.2rem; left:1.2rem; right:1.2rem;
+    z-index:2;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:1rem;
+  }
+
+  .video-insert-ete .video-caption h3{
+    font-family:var(--font-display);
+    font-style:italic;
+    color:var(--bone);
+    font-size:clamp(1.2rem, 2.6vw, 1.9rem);
+  }
+
+  .video-insert-ete .video-toggle{
+    flex-shrink:0;
+    width:44px; height:44px;
+    border:1px solid var(--bone);
+    background:rgba(58,47,34,0.4);
+    color:var(--bone);
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:var(--font-mono);
+    font-size:0.8rem;
+    transition:background 0.3s ease;
+  }
+
+  .video-insert-ete .video-toggle:hover{ background:rgba(58,47,34,0.7); }
+
+  @media (max-width:900px){
+    .video-insert-ete{ padding:0 1.8rem 3rem; }
+    .video-insert-ete .video-caption{ flex-direction:column; align-items:flex-start; gap:0.8rem; }
+  }
+
   /* ---------- FOOTER ---------- */
   footer{
     padding:5rem 5.5rem 3rem;
@@ -606,6 +691,19 @@
       <p class="lede">Quatre prises tournées à la lumière naturelle, grain plus clair, grade plus chaud. Une capsule à part, pensée pour les mois longs.</p>
     </section>
 
+    <div class="video-insert-ete">
+      <div class="video-frame">
+        <span class="video-code"><span class="rec-dot"></span>REC — 00:00:00:00</span>
+        <video id="video-ete" poster="ete-04-couchersoleil.png" muted loop playsinline autoplay preload="auto">
+          <source src="capsule-ete-2026.mp4" type="video/mp4">
+        </video>
+        <div class="video-caption">
+          <h3>Bande-annonce — Capsule Été 2026</h3>
+          <button class="video-toggle" id="video-toggle-ete" aria-label="Lecture / Pause">❚❚</button>
+        </div>
+      </div>
+    </div>
+
     <div class="collection-grid" id="capsule-ete-grid">
 
       <article class="piece" data-reveal>
@@ -693,11 +791,13 @@
     window.addEventListener('scroll', updateTimecode, { passive:true });
     updateTimecode();
 
-    // Video toggle
-    const video = document.getElementById('collection-video');
-    const videoToggle = document.getElementById('video-toggle');
-    const videoRec = document.querySelector('.video-code');
-    if(video && videoToggle){
+    // Video toggle (réutilisable pour chaque encart vidéo)
+    function setupVideoControl(videoId, toggleId){
+      const video = document.getElementById(videoId);
+      const videoToggle = document.getElementById(toggleId);
+      if(!video || !videoToggle) return;
+      const videoRec = video.closest('.video-frame')?.querySelector('.video-code');
+
       videoToggle.addEventListener('click', ()=>{
         if(video.paused){
           video.play();
@@ -707,6 +807,7 @@
           videoToggle.textContent = '▶';
         }
       });
+
       video.addEventListener('timeupdate', ()=>{
         if(!videoRec) return;
         const t = video.currentTime;
@@ -716,6 +817,9 @@
         videoRec.childNodes[1].textContent = `REC — 00:${m}:${s}:${f}`;
       });
     }
+
+    setupVideoControl('collection-video', 'video-toggle');
+    setupVideoControl('video-ete', 'video-toggle-ete');
 
     const pieces = document.querySelectorAll('[data-frame]');
     const revealItems = document.querySelectorAll('[data-frame], [data-reveal]');
