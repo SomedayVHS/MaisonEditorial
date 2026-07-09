@@ -447,89 +447,43 @@
     .capsule-heading{ padding:3rem 1.8rem 2rem; }
   }
 
-  /* ---------- VIDEO INSERT ÉTÉ (variante chaude) ---------- */
-  .video-insert-ete{
-    max-width:1500px;
-    margin:0 auto;
-    padding:0 5.5rem 5rem;
-  }
-
-  .video-insert-ete .video-frame{
-    position:relative;
-    aspect-ratio:16/9;
-    overflow:hidden;
-    background:#3a2f22;
-  }
-
-  .video-insert-ete .video-frame video{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-    filter:saturate(1.05) contrast(1.02) brightness(1.03);
-  }
-
-  .video-insert-ete .video-frame::after{
-    content:'';
-    position:absolute; inset:0;
-    background:linear-gradient(180deg, rgba(58,47,34,0.05) 0%, rgba(58,47,34,0.4) 100%);
-    pointer-events:none;
-  }
-
-  .video-insert-ete .video-code{
-    position:absolute; top:1.2rem; left:1.2rem;
+  /* ---------- BACK TO TOP ---------- */
+  .back-to-top{
+    position:fixed;
+    bottom:1.8rem;
+    right:1.8rem;
+    width:42px;
+    height:42px;
+    border:1px solid var(--ink);
+    background:var(--bone);
+    color:var(--ink);
     font-family:var(--font-mono);
-    font-size:0.7rem;
-    letter-spacing:1px;
-    color:var(--bone);
-    background:rgba(58,47,34,0.55);
-    padding:0.35rem 0.75rem;
-    z-index:2;
-    display:flex;
-    align-items:center;
-    gap:0.5rem;
-  }
-
-  .video-insert-ete .rec-dot{
-    background:#9C6B3A;
-  }
-
-  .video-insert-ete .video-caption{
-    position:absolute; bottom:1.2rem; left:1.2rem; right:1.2rem;
-    z-index:2;
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
-    gap:1rem;
-  }
-
-  .video-insert-ete .video-caption h3{
-    font-family:var(--font-display);
-    font-style:italic;
-    color:var(--bone);
-    font-size:clamp(1.2rem, 2.6vw, 1.9rem);
-  }
-
-  .video-insert-ete .video-toggle{
-    flex-shrink:0;
-    width:44px; height:44px;
-    border:1px solid var(--bone);
-    background:rgba(58,47,34,0.4);
-    color:var(--bone);
-    cursor:pointer;
+    font-size:0.85rem;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-family:var(--font-mono);
-    font-size:0.8rem;
-    transition:background 0.3s ease;
+    cursor:pointer;
+    opacity:0;
+    pointer-events:none;
+    transform:translateY(8px);
+    transition:opacity 0.35s ease, transform 0.35s ease, background 0.3s ease, color 0.3s ease;
+    z-index:60;
   }
 
-  .video-insert-ete .video-toggle:hover{ background:rgba(58,47,34,0.7); }
+  .back-to-top.is-visible{
+    opacity:0.85;
+    pointer-events:auto;
+    transform:translateY(0);
+  }
+
+  .back-to-top:hover{
+    opacity:1;
+    background:var(--ink);
+    color:var(--bone);
+  }
 
   @media (max-width:900px){
-    .video-insert-ete{ padding:0 1.8rem 3rem; }
-    .video-insert-ete .video-caption{ flex-direction:column; align-items:flex-start; gap:0.8rem; }
+    .back-to-top{ bottom:1.2rem; right:1.2rem; width:38px; height:38px; }
   }
 
   /* ---------- FOOTER ---------- */
@@ -573,7 +527,7 @@
         <li><a href="maison-editorial-final.html#editorial">Éditorial</a></li>
         <li><a href="collections.html" class="active">Collections</a></li>
         <li><a href="maison-editorial-final.html#maison">La Maison</a></li>
-        <li><a href="maison-editorial-final.html#contact">Contact</a></li>
+        <li><a href="mailto:somedayvhs@outlook.fr">Contact</a></li>
       </ul>
     </nav>
   </header>
@@ -691,19 +645,6 @@
       <p class="lede">Quatre prises tournées à la lumière naturelle, grain plus clair, grade plus chaud. Une capsule à part, pensée pour les mois longs.</p>
     </section>
 
-    <div class="video-insert-ete">
-      <div class="video-frame">
-        <span class="video-code"><span class="rec-dot"></span>REC — 00:00:00:00</span>
-        <video id="video-ete" poster="ete-04-couchersoleil.png" muted loop playsinline autoplay preload="auto">
-          <source src="capsule-ete-2026.mp4" type="video/mp4">
-        </video>
-        <div class="video-caption">
-          <h3>Bande-annonce — Capsule Été 2026</h3>
-          <button class="video-toggle" id="video-toggle-ete" aria-label="Lecture / Pause">❚❚</button>
-        </div>
-      </div>
-    </div>
-
     <div class="collection-grid" id="capsule-ete-grid">
 
       <article class="piece" data-reveal>
@@ -759,7 +700,7 @@
     <section class="cta-strip" id="maison">
       <p class="quote-mark">"</p>
       <h3>La collection complète se feuillette comme un scénario — chaque pièce en appelle une autre.</h3>
-      <a href="maison-editorial-final.html#contact" class="btn-invert">Prendre rendez-vous en showroom</a>
+      <a href="mailto:somedayvhs@outlook.fr" class="btn-invert">Prendre rendez-vous en showroom</a>
     </section>
   </main>
 
@@ -772,6 +713,8 @@
     </div>
     <p>&copy; 2026 MAISON Éditorial. Tous droits réservés.</p>
   </footer>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Remonter en haut de page">↑</button>
 
   <script>
     const tc = document.getElementById('tc-value');
@@ -819,7 +762,6 @@
     }
 
     setupVideoControl('collection-video', 'video-toggle');
-    setupVideoControl('video-ete', 'video-toggle-ete');
 
     const pieces = document.querySelectorAll('[data-frame]');
     const revealItems = document.querySelectorAll('[data-frame], [data-reveal]');
@@ -829,6 +771,19 @@
       });
     }, { threshold:0.15 });
     revealItems.forEach(p=>io.observe(p));
+
+    // Back to top
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', ()=>{
+      if(window.scrollY > window.innerHeight * 0.6){
+        backToTop.classList.add('is-visible');
+      } else {
+        backToTop.classList.remove('is-visible');
+      }
+    }, { passive:true });
+    backToTop.addEventListener('click', ()=>{
+      window.scrollTo({ top:0, behavior:'smooth' });
+    });
 
     // Filter tabs
     const tabs = document.querySelectorAll('.filter-tabs button');

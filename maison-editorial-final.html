@@ -379,6 +379,45 @@
     text-transform:uppercase;
   }
 
+  /* ---------- BACK TO TOP ---------- */
+  .back-to-top{
+    position:fixed;
+    bottom:1.8rem;
+    right:1.8rem;
+    width:42px;
+    height:42px;
+    border:1px solid var(--ink);
+    background:var(--bone);
+    color:var(--ink);
+    font-family:var(--font-mono);
+    font-size:0.85rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    opacity:0;
+    pointer-events:none;
+    transform:translateY(8px);
+    transition:opacity 0.35s ease, transform 0.35s ease, background 0.3s ease, color 0.3s ease;
+    z-index:60;
+  }
+
+  .back-to-top.is-visible{
+    opacity:0.85;
+    pointer-events:auto;
+    transform:translateY(0);
+  }
+
+  .back-to-top:hover{
+    opacity:1;
+    background:var(--ink);
+    color:var(--bone);
+  }
+
+  @media (max-width:900px){
+    .back-to-top{ bottom:1.2rem; right:1.2rem; width:38px; height:38px; }
+  }
+
   /* ---------- FOOTER ---------- */
   footer{
     padding:5rem 5.5rem 3rem;
@@ -442,7 +481,7 @@
         <li><a href="#editorial">Éditorial</a></li>
         <li><a href="collections.html">Collections</a></li>
         <li><a href="#maison">La Maison</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="mailto:somedayvhs@outlook.fr">Contact</a></li>
       </ul>
     </nav>
   </header>
@@ -523,6 +562,8 @@
     <p>&copy; 2026 MAISON Éditorial. Tous droits réservés.</p>
   </footer>
 
+  <button class="back-to-top" id="back-to-top" aria-label="Remonter en haut de page">↑</button>
+
   <script>
     // Timecode rail: ticks up with scroll position, framed as a film counter
     const tc = document.getElementById('tc-value');
@@ -550,6 +591,19 @@
       });
     }, { threshold:0.2 });
     frames.forEach(f=>io.observe(f));
+
+    // Back to top
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', ()=>{
+      if(window.scrollY > window.innerHeight * 0.6){
+        backToTop.classList.add('is-visible');
+      } else {
+        backToTop.classList.remove('is-visible');
+      }
+    }, { passive:true });
+    backToTop.addEventListener('click', ()=>{
+      window.scrollTo({ top:0, behavior:'smooth' });
+    });
   </script>
 
 </body>
