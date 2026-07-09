@@ -403,6 +403,50 @@
     color:var(--ink);
   }
 
+  /* ---------- CAPSULE ÉTÉ ---------- */
+  .capsule-heading{
+    max-width:1500px;
+    margin:0 auto;
+    padding:1rem 5.5rem 3rem;
+    border-top:1px solid rgba(18,17,15,0.12);
+    padding-top:4rem;
+  }
+
+  .capsule-heading .kicker{
+    font-family:var(--font-mono);
+    font-size:0.75rem;
+    letter-spacing:3px;
+    color:#9C6B3A;
+    text-transform:uppercase;
+    margin-bottom:1.2rem;
+    display:flex;
+    align-items:center;
+    gap:0.8rem;
+  }
+
+  .capsule-heading .kicker::before{
+    content:''; width:24px; height:1px; background:#9C6B3A;
+  }
+
+  .capsule-heading h2{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-weight:400;
+    font-size:clamp(1.8rem, 3.6vw, 2.8rem);
+    max-width:700px;
+  }
+
+  .capsule-heading p.lede{
+    margin-top:1.2rem;
+    max-width:560px;
+    color:var(--smoke);
+    font-size:0.98rem;
+  }
+
+  @media (max-width:900px){
+    .capsule-heading{ padding:3rem 1.8rem 2rem; }
+  }
+
   /* ---------- FOOTER ---------- */
   footer{
     padding:5rem 5.5rem 3rem;
@@ -556,6 +600,64 @@
 
     </div>
 
+    <section class="capsule-heading">
+      <p class="kicker">Capsule 02 — Été 2026</p>
+      <h2>Même œil, lumière différente — la bobine tournée en plein jour.</h2>
+      <p class="lede">Quatre prises tournées à la lumière naturelle, grain plus clair, grade plus chaud. Une capsule à part, pensée pour les mois longs.</p>
+    </section>
+
+    <div class="collection-grid" id="capsule-ete-grid">
+
+      <article class="piece" data-reveal>
+        <div class="piece-frame">
+          <span class="piece-code">00:00:22</span>
+          <img src="ete-01-promenade.png" alt="Robe de lin blanche fluide, femme marchant sur un chemin de campagne au soleil">
+        </div>
+        <div class="piece-meta">
+          <p class="piece-cat">Robe — Prise 07</p>
+          <h3>La Robe de Lin</h3>
+          <p class="piece-price">460 €</p>
+        </div>
+      </article>
+
+      <article class="piece" data-reveal>
+        <div class="piece-frame">
+          <span class="piece-code">00:01:05</span>
+          <img src="ete-02-tailleur.png" alt="Tailleur en lin ton sable, veste et pantalon large, sous des oliviers">
+        </div>
+        <div class="piece-meta">
+          <p class="piece-cat">Tailleur — Prise 08</p>
+          <h3>Le Costume Léger</h3>
+          <p class="piece-price">690 €</p>
+        </div>
+      </article>
+
+      <article class="piece" data-reveal>
+        <div class="piece-frame">
+          <span class="piece-code">00:01:48</span>
+          <img src="ete-03-decontractee.png" alt="Chemise blanche ample ouverte sur short en lin, terrasse en pierre ensoleillée">
+        </div>
+        <div class="piece-meta">
+          <p class="piece-cat">Ensemble — Prise 09</p>
+          <h3>Le Plan Large</h3>
+          <p class="piece-price">380 €</p>
+        </div>
+      </article>
+
+      <article class="piece" data-reveal>
+        <div class="piece-frame">
+          <span class="piece-code">00:02:31</span>
+          <img src="ete-04-couchersoleil.png" alt="Robe fluide ton ocre, femme au bord d'une falaise au coucher du soleil">
+        </div>
+        <div class="piece-meta">
+          <p class="piece-cat">Robe — Prise 10</p>
+          <h3>Le Dernier Rayon</h3>
+          <p class="piece-price">520 €</p>
+        </div>
+      </article>
+
+    </div>
+
     <section class="cta-strip" id="maison">
       <p class="quote-mark">"</p>
       <h3>La collection complète se feuillette comme un scénario — chaque pièce en appelle une autre.</h3>
@@ -616,12 +718,13 @@
     }
 
     const pieces = document.querySelectorAll('[data-frame]');
+    const revealItems = document.querySelectorAll('[data-frame], [data-reveal]');
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(e=>{
         if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); }
       });
     }, { threshold:0.15 });
-    pieces.forEach(p=>io.observe(p));
+    revealItems.forEach(p=>io.observe(p));
 
     // Filter tabs
     const tabs = document.querySelectorAll('.filter-tabs button');
