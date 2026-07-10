@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HOMESAKE — Vintage</title>
+<title>HOME.SAKE — Vintage</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<meta name="description" content="La capsule Vintage HOMESAKE — pièces d'archive retrouvées, sourcées et remises en scène. Pas une nouvelle collection, une bobine qu'on ressort du tiroir.">
-<meta property="og:title" content="HOMESAKE — Vintage">
+<meta name="description" content="La capsule Vintage HOME.SAKE — pièces d'archive retrouvées, sourcées et remises en scène. Pas une nouvelle collection, une bobine qu'on ressort du tiroir.">
+<meta property="og:title" content="HOME.SAKE — Vintage">
 <meta property="og:description" content="Des pièces qu'on retrouve, pas qu'on refabrique.">
 <meta property="og:image" content="hero.png">
 <meta property="og:type" content="website">
@@ -476,6 +476,143 @@
     .lightbox-next{ right:0.6rem; }
   }
 
+  /* ---------- CAPSULE ACAPULCO.BIKINI ---------- */
+  .capsule-acapulco-heading{
+    max-width:1200px;
+    margin:0 auto;
+    padding:1rem 5.5rem 3rem;
+    border-top:1px solid rgba(18,17,15,0.12);
+    padding-top:4rem;
+  }
+
+  .capsule-acapulco-heading .kicker{
+    font-family:var(--font-mono);
+    font-size:0.75rem;
+    letter-spacing:3px;
+    color:var(--oxblood);
+    text-transform:uppercase;
+    margin-bottom:1.2rem;
+    display:flex;
+    align-items:center;
+    gap:0.8rem;
+  }
+
+  .capsule-acapulco-heading .kicker::before{
+    content:''; width:24px; height:1px; background:var(--oxblood);
+  }
+
+  .capsule-acapulco-heading h2{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-weight:400;
+    font-size:clamp(1.8rem, 3.6vw, 2.8rem);
+    max-width:720px;
+  }
+
+  .capsule-acapulco-heading p.lede{
+    margin-top:1.2rem;
+    max-width:580px;
+    color:var(--smoke);
+    font-size:0.98rem;
+  }
+
+  @media (max-width:900px){
+    .capsule-acapulco-heading{ padding:3rem 1.8rem 2rem; }
+  }
+
+  /* Video insert — variante Acapulco, saturée et chaude */
+  .video-insert-acapulco{
+    max-width:1100px;
+    margin:0 auto;
+    padding:0 5.5rem 5rem;
+  }
+
+  .video-insert-acapulco .video-frame{
+    position:relative;
+    aspect-ratio:16/9;
+    overflow:hidden;
+    background:#4a2f1a;
+  }
+
+  .video-insert-acapulco .video-frame video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    filter:saturate(1.25) contrast(1.06) sepia(8%);
+  }
+
+  .video-insert-acapulco .video-frame::after{
+    content:'';
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(74,47,26,0.05) 0%, rgba(74,47,26,0.4) 100%);
+    pointer-events:none;
+  }
+
+  .video-insert-acapulco .video-code{
+    position:absolute; top:1.2rem; left:1.2rem;
+    font-family:var(--font-mono);
+    font-size:0.7rem;
+    letter-spacing:1px;
+    color:var(--bone);
+    background:rgba(74,47,26,0.55);
+    padding:0.35rem 0.75rem;
+    z-index:2;
+    display:flex;
+    align-items:center;
+    gap:0.5rem;
+  }
+
+  .video-insert-acapulco .rec-dot{
+    width:6px; height:6px; border-radius:50%;
+    background:#D97B3F;
+    animation:pulse 1.6s infinite ease-in-out;
+  }
+
+  .video-insert-acapulco .video-caption{
+    position:absolute; bottom:1.2rem; left:1.2rem; right:1.2rem;
+    z-index:2;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:1rem;
+  }
+
+  .video-insert-acapulco .video-caption h3{
+    font-family:var(--font-display);
+    font-style:italic;
+    color:var(--bone);
+    font-size:clamp(1.2rem, 2.6vw, 1.9rem);
+  }
+
+  .video-insert-acapulco .video-controls{
+    display:flex;
+    gap:0.6rem;
+    flex-shrink:0;
+  }
+
+  .video-insert-acapulco .video-toggle{
+    flex-shrink:0;
+    width:44px; height:44px;
+    border:1px solid var(--bone);
+    background:rgba(74,47,26,0.4);
+    color:var(--bone);
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:var(--font-mono);
+    font-size:0.8rem;
+    transition:background 0.3s ease;
+  }
+
+  .video-insert-acapulco .video-toggle:hover{ background:rgba(74,47,26,0.7); }
+
+  @media (max-width:900px){
+    .video-insert-acapulco{ padding:0 1.8rem 3rem; }
+    .video-insert-acapulco .video-caption{ flex-direction:column; align-items:flex-start; gap:0.8rem; }
+  }
+
   /* ---------- FOOTER ---------- */
   footer{
     padding:5rem 5.5rem 3rem;
@@ -531,7 +668,7 @@
   </div>
 
   <header>
-    <a href="maison-editorial-final.html" class="logo">Homesake<small>Éditorial — Paris</small></a>
+    <a href="maison-editorial-final.html" class="logo">Home.Sake<small>Éditorial — Paris</small></a>
     <nav>
       <ul>
         <li><a href="maison-editorial-final.html#editorial">Éditorial</a></li>
@@ -551,7 +688,7 @@
     </section>
 
     <div class="intro-text">
-      <p>La capsule Vintage ne suit pas le calendrier des saisons. Elle s'alimente au rythme des trouvailles — dépôts-ventes, marchés, garde-robes de famille. Chaque pièce a déjà vécu une vie avant d'arriver chez HOMESAKE, et cette vie reste visible : un bouton changé, une doublure qui a jauni, une coupe qui appartient clairement à une autre décennie.</p>
+      <p>La capsule Vintage ne suit pas le calendrier des saisons. Elle s'alimente au rythme des trouvailles — dépôts-ventes, marchés, garde-robes de famille. Chaque pièce a déjà vécu une vie avant d'arriver chez HOME.SAKE, et cette vie reste visible : un bouton changé, une doublure qui a jauni, une coupe qui appartient clairement à une autre décennie.</p>
       <p>On ne restaure pas à l'identique. On nettoie, on répare ce qui doit l'être pour être porté, et on laisse le reste raconter d'où la pièce vient.</p>
     </div>
 
@@ -633,6 +770,86 @@
 
     </div>
 
+    <section class="capsule-acapulco-heading">
+      <p class="kicker">Capsule 04 — Acapulco.Bikini</p>
+      <h2>Un été qu'on n'a pas vécu, mais dont on a hérité les couleurs.</h2>
+      <p class="lede">Quatre pièces sourcées dans les malles d'un même voyage au Mexique, années 70. Kodachrome saturé, sel séché sur le tissu, la chaleur encore lisible sur chaque photo.</p>
+    </section>
+
+    <div class="video-insert-acapulco">
+      <div class="video-frame">
+        <span class="video-code"><span class="rec-dot"></span>ARCHIVE — 00:00:00:00</span>
+        <video id="acapulco-video" poster="acapulco-poster.png" muted loop playsinline autoplay preload="auto">
+          <source src="acapulco-teaser.mp4" type="video/mp4">
+        </video>
+        <div class="video-caption">
+          <h3>Bobine retrouvée — Acapulco, 1976</h3>
+          <div class="video-controls">
+            <button class="video-toggle" id="video-mute-acapulco" aria-label="Activer / couper le son">🔇</button>
+            <button class="video-toggle" id="video-toggle-acapulco" aria-label="Lecture / Pause">❚❚</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="collection-grid" id="acapulco-grid">
+
+      <article class="piece" data-frame data-cat="maillots">
+        <div class="piece-frame">
+          <span class="piece-code">AB.01</span>
+          <span class="piece-status">Pièce unique</span>
+          <img src="acapulco-01-mexique-retrouve.png" alt="Maillot deux pièces vintage orange, bord de piscine, Kodachrome années 70">
+        </div>
+        <div class="piece-meta">
+          <p class="piece-cat">Maillot — Archive 70s</p>
+          <h3>Le Mexique Retrouvé</h3>
+          <p class="piece-price">180 €</p>
+          <p class="piece-note">Bikini deux pièces, coloris d'origine préservé.</p>
+        </div>
+      </article>
+
+      <article class="piece" data-frame data-cat="maillots">
+        <div class="piece-frame">
+          <span class="piece-code">AB.02</span>
+          <img src="acapulco-02-vague-solaire.png" alt="Maillot une pièce vintage jaune, dos échancré, bord de mer années 70">
+        </div>
+        <div class="piece-meta">
+          <p class="piece-cat">Maillot — Archive 70s</p>
+          <h3>La Vague Solaire</h3>
+          <p class="piece-price">160 €</p>
+          <p class="piece-note">Une pièce, dos échancré, élastique remplacé à l'identique.</p>
+        </div>
+      </article>
+
+      <article class="piece" data-frame data-cat="plage">
+        <div class="piece-frame">
+          <span class="piece-code">AB.03</span>
+          <span class="piece-status">Pièce unique</span>
+          <img src="acapulco-03-sable-chaud.png" alt="Kaftan de plage vintage fleuri, marche sur la plage au coucher du soleil">
+        </div>
+        <div class="piece-meta">
+          <p class="piece-cat">Robe de plage — Archive 70s</p>
+          <h3>Le Sable Chaud</h3>
+          <p class="piece-price">210 €</p>
+          <p class="piece-note">Kaftan léger, imprimé d'origine, coton fatigué par le soleil.</p>
+        </div>
+      </article>
+
+      <article class="piece" data-frame data-cat="maillots">
+        <div class="piece-frame">
+          <span class="piece-code">AB.04</span>
+          <img src="acapulco-04-dernier-bain.png" alt="Bikini rouge vintage, coucher de soleil sur la plage">
+        </div>
+        <div class="piece-meta">
+          <p class="piece-cat">Maillot — Archive 70s</p>
+          <h3>Le Dernier Bain</h3>
+          <p class="piece-price">170 €</p>
+          <p class="piece-note">Bikini rouge, dernière pièce de la malle, jamais réassortie.</p>
+        </div>
+      </article>
+
+    </div>
+
     <section class="cta-strip">
       <p class="quote-mark">"</p>
       <h3>On ne peut pas refaire une pièce vintage. On peut seulement la retrouver avant quelqu'un d'autre.</h3>
@@ -641,13 +858,13 @@
   </main>
 
   <footer>
-    <a href="collections.html" class="footer-logo">Homesake</a>
+    <a href="collections.html" class="footer-logo">Home.Sake</a>
     <div class="socials">
       <a href="#">Instagram</a>
       <a href="#">Pinterest</a>
       <a href="#">Journal</a>
     </div>
-    <p class="copyright">&copy; 2026 HOMESAKE Éditorial. Tous droits réservés.</p>
+    <p class="copyright">&copy; 2026 HOME.SAKE Éditorial. Tous droits réservés.</p>
     <p class="credit">Direction créative & production visuelle — Stampede Production</p>
   </footer>
 
@@ -679,36 +896,43 @@
     window.addEventListener('scroll', updateTimecode, { passive:true });
     updateTimecode();
 
-    // Video control
-    const vintageVideo = document.getElementById('vintage-video');
-    const vintageToggle = document.getElementById('video-toggle-vintage');
-    const vintageMute = document.getElementById('video-mute-vintage');
-    const vintageRec = vintageVideo?.closest('.video-frame')?.querySelector('.video-code');
-    if(vintageVideo && vintageToggle){
-      vintageToggle.addEventListener('click', ()=>{
-        if(vintageVideo.paused){
-          vintageVideo.play();
-          vintageToggle.textContent = '❚❚';
+    // Video control (réutilisable pour chaque encart)
+    function setupVideoControl(videoId, toggleId, muteId, prefix){
+      const video = document.getElementById(videoId);
+      const toggle = document.getElementById(toggleId);
+      const mute = document.getElementById(muteId);
+      const rec = video?.closest('.video-frame')?.querySelector('.video-code');
+      if(!video || !toggle) return;
+
+      toggle.addEventListener('click', ()=>{
+        if(video.paused){
+          video.play();
+          toggle.textContent = '❚❚';
         } else {
-          vintageVideo.pause();
-          vintageToggle.textContent = '▶';
+          video.pause();
+          toggle.textContent = '▶';
         }
       });
-      if(vintageMute){
-        vintageMute.addEventListener('click', ()=>{
-          vintageVideo.muted = !vintageVideo.muted;
-          vintageMute.textContent = vintageVideo.muted ? '🔇' : '🔊';
+
+      if(mute){
+        mute.addEventListener('click', ()=>{
+          video.muted = !video.muted;
+          mute.textContent = video.muted ? '🔇' : '🔊';
         });
       }
-      vintageVideo.addEventListener('timeupdate', ()=>{
-        if(!vintageRec) return;
-        const t = vintageVideo.currentTime;
+
+      video.addEventListener('timeupdate', ()=>{
+        if(!rec) return;
+        const t = video.currentTime;
         const m = String(Math.floor(t/60)).padStart(2,'0');
         const s = String(Math.floor(t%60)).padStart(2,'0');
         const f = String(Math.floor((t%1)*24)).padStart(2,'0');
-        vintageRec.childNodes[1].textContent = `ARCHIVE — 00:${m}:${s}:${f}`;
+        rec.childNodes[1].textContent = `${prefix} — 00:${m}:${s}:${f}`;
       });
     }
+
+    setupVideoControl('vintage-video', 'video-toggle-vintage', 'video-mute-vintage', 'ARCHIVE');
+    setupVideoControl('acapulco-video', 'video-toggle-acapulco', 'video-mute-acapulco', 'ARCHIVE');
 
     // Reveal on scroll
     const pieces = document.querySelectorAll('[data-frame]');
