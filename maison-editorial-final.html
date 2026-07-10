@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HOMESAKE — Planche Contact</title>
+<title>HOME.SAKE — Planche Contact</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<meta name="description" content="HOMESAKE — une maison qui tourne la mode comme un film. Éditorial, collections et démarche créative pensés comme une pellicule, pas comme un catalogue.">
-<meta property="og:title" content="HOMESAKE — Planche Contact">
-<meta property="og:description" content="La mode se regarde comme un film. Découvrez l'éditorial HOMESAKE.">
+<meta name="description" content="HOME.SAKE — une maison qui tourne la mode comme un film. Éditorial, collections et démarche créative pensés comme une pellicule, pas comme un catalogue.">
+<meta property="og:title" content="HOME.SAKE — Planche Contact">
+<meta property="og:description" content="La mode se regarde comme un film. Découvrez l'éditorial HOME.SAKE.">
 <meta property="og:image" content="hero.png">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
@@ -425,6 +425,46 @@
     .back-to-top{ bottom:1.2rem; right:1.2rem; width:38px; height:38px; }
   }
 
+  /* ---------- STUDIO NOTICE ---------- */
+  .studio-notice{
+    background:var(--bone);
+    border-bottom:1px solid rgba(18,17,15,0.12);
+    padding:0.9rem 5.5rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:0.7rem;
+    text-align:center;
+    flex-wrap:wrap;
+  }
+
+  .studio-notice p{
+    font-family:var(--font-mono);
+    font-size:0.7rem;
+    letter-spacing:0.5px;
+    color:var(--smoke);
+    line-height:1.5;
+  }
+
+  .studio-notice strong{
+    color:var(--oxblood);
+    font-weight:400;
+  }
+
+  .studio-notice a{
+    color:var(--oxblood);
+    border-bottom:1px solid rgba(107,46,42,0.4);
+    transition:border-color 0.3s ease;
+  }
+
+  .studio-notice a:hover{
+    border-color:var(--oxblood);
+  }
+
+  @media (max-width:900px){
+    .studio-notice{ padding:0.9rem 1.5rem; }
+  }
+
   /* ---------- FOOTER ---------- */
   footer{
     padding:5rem 5.5rem 3rem;
@@ -482,7 +522,7 @@
   </div>
 
   <header>
-    <a href="maison-editorial-final.html" class="logo">Homesake<small>Éditorial — Paris</small></a>
+    <a href="maison-editorial-final.html" class="logo">Home.Sake<small>Éditorial — Paris</small></a>
     <nav>
       <ul>
         <li><a href="#editorial">Éditorial</a></li>
@@ -502,6 +542,10 @@
       </div>
       <p class="hero-scroll">Défiler pour lire la bobine ↓</p>
     </section>
+
+    <div class="studio-notice">
+      <p><strong>HOME.SAKE</strong> est une démonstration de direction créative — pas une marque en vente. Conçu par <a href="mailto:somedayvhs@outlook.fr">Stampede Production</a>, studio de direction visuelle IA.</p>
+    </div>
 
     <section id="editorial">
       <div class="section-heading">
@@ -556,18 +600,18 @@
     <section class="quote-section" id="maison">
       <p class="quote-mark">"</p>
       <h3>L'élégance n'est pas de se faire remarquer, mais de s'en souvenir — comme un plan qu'on rembobine.</h3>
-      <p class="quote-attr">Homesake, Note d'intention</p>
+      <p class="quote-attr">Home.Sake, Note d'intention</p>
     </section>
   </main>
 
   <footer id="contact">
-    <p class="footer-logo">Homesake</p>
+    <p class="footer-logo">Home.Sake</p>
     <div class="socials">
       <a href="#">Instagram</a>
       <a href="#">Pinterest</a>
       <a href="#">Journal</a>
     </div>
-    <p>&copy; 2026 HOMESAKE Éditorial. Tous droits réservés.</p>
+    <p>&copy; 2026 HOME.SAKE Éditorial. Tous droits réservés.</p>
   </footer>
 
   <button class="back-to-top" id="back-to-top" aria-label="Remonter en haut de page">↑</button>
