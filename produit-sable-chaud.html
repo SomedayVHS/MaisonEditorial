@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOME.SAKE — Le Sable Chaud</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="description" content="Le Sable Chaud — Un kaftan léger à motif fleuri, sourcé dans la même malle que le reste de la capsule. Le tissu a été fatigué par le sole. HOME.SAKE, Capsule Acapulco.Bikini.">
+<meta property="og:title" content="HOME.SAKE — Le Sable Chaud">
+<meta property="og:description" content="Kaftan de plage vintage fleuri, marche sur la plage au coucher du soleil.">
+<meta property="og:image" content="acapulco-03-sable-chaud.png">
+<meta property="og:type" content="product">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  :root{
+    --ink:#12110F;
+    --bone:#EFE9DF;
+    --brass:#9C7A45;
+    --oxblood:#6B2E2A;
+    --smoke:#6E6A62;
+    --font-display:'Bodoni Moda', serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'Space Mono', monospace;
+  }
+
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--bone);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-weight:300;
+    line-height:1.65;
+    overflow-x:hidden;
+  }
+  a{ text-decoration:none; color:inherit; }
+  ::selection{ background:var(--brass); color:var(--bone); }
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--brass); outline-offset:3px; }
+
+  .grain{
+    position:fixed; inset:0; pointer-events:none; z-index:999;
+    opacity:0.05; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  header{
+    padding:2.2rem 4rem 2.2rem 5.5rem;
+    display:flex; justify-content:space-between; align-items:center;
+    color:var(--ink);
+  }
+  .logo{ font-family:var(--font-display); font-style:italic; font-size:1.6rem; letter-spacing:1px; }
+  .logo small{ display:block; font-family:var(--font-mono); font-style:normal; font-size:0.6rem; letter-spacing:4px; opacity:0.55; margin-top:2px; }
+  nav ul{ list-style:none; display:flex; gap:2.6rem; }
+  nav a{
+    font-family:var(--font-mono); font-size:0.72rem; letter-spacing:1.5px;
+    text-transform:uppercase; position:relative; padding-bottom:4px;
+  }
+  nav a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background:currentColor; transition:width 0.35s ease;
+  }
+  nav a:hover::after{ width:100%; }
+
+  @media (max-width:900px){
+    header{ flex-direction:column; gap:1.2rem; padding:1.8rem 1.5rem; }
+    nav ul{ gap:1.4rem; flex-wrap:wrap; justify-content:center; }
+  }
+
+  .breadcrumb{
+    padding:0 5.5rem;
+    max-width:1400px;
+    margin:0 auto;
+    font-family:var(--font-mono);
+    font-size:0.7rem;
+    letter-spacing:1px;
+    color:var(--smoke);
+    text-transform:uppercase;
+  }
+  .breadcrumb a{ color:var(--smoke); transition:color 0.3s ease; }
+  .breadcrumb a:hover{ color:var(--oxblood); }
+
+  .product{
+    max-width:1400px;
+    margin:0 auto;
+    padding:2rem 5.5rem 6rem;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:4rem;
+    align-items:start;
+  }
+
+  .product-image{
+    position:relative;
+    overflow:hidden;
+  }
+
+  .product-image img{
+    width:100%;
+    display:block;
+    aspect-ratio:3/4;
+    object-fit:cover;
+  }
+
+  .product-image .piece-code{
+    position:absolute; top:1rem; left:1rem;
+    font-family:var(--font-mono);
+    font-size:0.7rem;
+    letter-spacing:1px;
+    color:var(--bone);
+    background:rgba(18,17,15,0.6);
+    padding:0.3rem 0.7rem;
+  }
+
+  .product-info{
+    position:sticky;
+    top:3rem;
+    padding-top:1rem;
+  }
+
+  .product-info .cat{
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--oxblood);
+    margin-bottom:1rem;
+  }
+
+  .product-info h1{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-weight:600;
+    font-size:clamp(2rem, 3.6vw, 2.8rem);
+    margin-bottom:1.2rem;
+    line-height:1.15;
+  }
+
+  .product-info .price{
+    font-family:var(--font-mono);
+    font-size:1.1rem;
+    margin-bottom:2rem;
+  }
+
+  .product-info .description p{
+    color:var(--smoke);
+    font-size:1rem;
+    margin-bottom:1.4rem;
+    max-width:480px;
+  }
+
+  .product-details{
+    margin:2rem 0;
+    padding:1.6rem 0;
+    border-top:1px solid rgba(18,17,15,0.15);
+    border-bottom:1px solid rgba(18,17,15,0.15);
+  }
+
+  .product-details dl{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:0.6rem 1.4rem;
+    font-size:0.92rem;
+  }
+
+  .product-details dt{
+    font-family:var(--font-mono);
+    font-size:0.7rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--smoke);
+  }
+
+  .product-details dd{ color:var(--ink); }
+
+  .product-cta{
+    display:inline-flex;
+    align-items:center;
+    gap:0.6rem;
+    font-family:var(--font-mono);
+    font-size:0.75rem;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    padding:1rem 2.2rem;
+    background:var(--ink);
+    color:var(--bone);
+    border:1px solid var(--ink);
+    transition:background 0.3s ease, color 0.3s ease;
+    margin-top:1rem;
+  }
+
+  .product-cta:hover{
+    background:transparent;
+    color:var(--ink);
+  }
+
+  @media (max-width:900px){
+    .breadcrumb{ padding:0 1.8rem; }
+    .product{ grid-template-columns:1fr; padding:1.5rem 1.8rem 4rem; gap:2rem; }
+    .product-info{ position:static; }
+  }
+
+  footer{
+    padding:5rem 5.5rem 3rem;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:2rem;
+    border-top:1px solid rgba(18,17,15,0.12);
+  }
+  .footer-logo{ font-family:var(--font-display); font-style:italic; font-size:1.4rem; transition:color 0.3s ease; } .footer-logo:hover{ color:var(--oxblood); }
+  .socials{ display:flex; gap:2rem; }
+  .socials a{
+    font-family:var(--font-mono); font-size:0.72rem; letter-spacing:1.5px;
+    text-transform:uppercase; color:var(--smoke); transition:color 0.3s ease;
+  }
+  .socials a:hover{ color:var(--oxblood); }
+  footer p{ font-family:var(--font-mono); font-size:0.68rem; color:var(--smoke); letter-spacing:0.5px; }
+  @media (max-width:900px){ footer{ padding:4rem 1.8rem 2.5rem; } }
+</style>
+</head>
+<body>
+
+  <div class="grain"></div>
+
+  <header>
+    <a href="maison-editorial-final.html" class="logo">Home.Sake<small>Éditorial — Paris</small></a>
+    <nav>
+      <ul>
+        <li><a href="maison-editorial-final.html#editorial">Éditorial</a></li>
+        <li><a href="collections.html">Collections</a></li>
+        <li><a href="vintage.html" class="active">Vintage</a></li>
+        <li><a href="la-maison.html">La Maison</a></li>
+        <li><a href="mailto:somedayvhs@outlook.fr">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <p class="breadcrumb"><a href="vintage.html">Vintage</a> / Le Sable Chaud</p>
+
+  <main class="product">
+    <div class="product-image">
+      <span class="piece-code">AB.03</span>
+      <span class="piece-status" style="position:absolute;top:1rem;right:1rem;font-family:var(--font-mono);font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--bone);background:rgba(156,122,69,0.85);padding:0.3rem 0.7rem;">Pièce unique</span>
+      <img src="acapulco-03-sable-chaud.png" alt="Kaftan de plage vintage fleuri, marche sur la plage au coucher du soleil">
+    </div>
+
+    <div class="product-info">
+      <p class="cat">Robe de plage — Archive 70s</p>
+      <h1>Le Sable Chaud</h1>
+      <p class="price">210 €</p>
+
+      <div class="description">
+        <p>Un kaftan léger à motif fleuri, sourcé dans la même malle que le reste de la capsule. Le tissu a été fatigué par le soleil et le sel — exactement ce qui donne à l'imprimé cette douceur qu'aucune réédition ne peut vraiment reproduire.</p>
+        <p>Se porte ouvert sur un maillot ou seul, en robe de plage courte selon l'heure de la journée.</p>
+      </div>
+
+      <div class="product-details">
+        <dl>
+          <dt>Matière</dt>
+          <dd>Coton léger, imprimé d'origine</dd>
+          <dt>Coupe</dt>
+          <dd>Ample, manches larges, longueur mi-cuisse</dd>
+          <dt>Entretien</dt>
+          <dd>Lavage délicat à la main</dd>
+          <dt>Provenance</dt>
+          <dd>Pièce vintage sourcée, exemplaire unique — pas de réédition possible</dd>
+        </dl>
+      </div>
+
+      <a href="mailto:somedayvhs@outlook.fr?subject=Le Sable Chaud (Acapulco.Bikini)" class="product-cta">Demander la disponibilité</a>
+    </div>
+  </main>
+
+  <footer>
+    <a href="vintage.html" class="footer-logo">Home.Sake</a>
+    <div class="socials">
+      <a href="#">Instagram</a>
+      <a href="#">Pinterest</a>
+      <a href="#">Journal</a>
+    </div>
+    <p>&copy; 2026 HOME.SAKE Éditorial. Tous droits réservés.</p>
+  </footer>
+
+</body>
+</html>
