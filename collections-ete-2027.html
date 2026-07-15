@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOME.SAKE — Été 2027</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="description" content="Été 2027 — la nouvelle capsule HOME.SAKE. Bleu cobalt, lumière de plage, dix pièces tournées comme un même été.">
+<meta property="og:title" content="HOME.SAKE — Été 2027">
+<meta property="og:description" content="Un été qui reste bleu du matin au soir — dix pièces, une seule lumière.">
+<meta property="og:image" content="ete2027-01-heure-bleue.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  :root{
+    --ink:#12110F;
+    --bone:#EFE9DF;
+    --brass:#9C7A45;
+    --oxblood:#6B2E2A;
+    --cobalt:#2B4A6B;
+    --smoke:#6E6A62;
+    --font-display:'Bodoni Moda', serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'Space Mono', monospace;
+  }
+
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--bone);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-weight:300;
+    line-height:1.65;
+    overflow-x:hidden;
+  }
+  a{ text-decoration:none; color:inherit; }
+  ::selection{ background:var(--cobalt); color:var(--bone); }
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--cobalt); outline-offset:3px; }
+
+  .grain{
+    position:fixed; inset:0; pointer-events:none; z-index:999;
+    opacity:0.05; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  .timecode-rail{
+    position:fixed; left:1.4rem; top:0; height:100vh;
+    display:flex; align-items:center; z-index:50; pointer-events:none;
+  }
+  .timecode-rail span{
+    font-family:var(--font-mono); font-size:0.7rem; letter-spacing:2px;
+    color:var(--ink); opacity:0.55; writing-mode:vertical-rl;
+    transform:rotate(180deg); display:flex; align-items:center; gap:0.6rem;
+  }
+  .timecode-rail .dot{ width:5px; height:5px; border-radius:50%; background:var(--cobalt); writing-mode:horizontal-tb; }
+  @media (max-width:900px){ .timecode-rail{ display:none; } }
+
+  header{
+    padding:2.2rem 4rem 2.2rem 5.5rem;
+    display:flex; justify-content:space-between; align-items:center;
+    color:var(--ink);
+  }
+  .logo{ font-family:var(--font-display); font-style:italic; font-size:1.6rem; letter-spacing:1px; }
+  .logo small{ display:block; font-family:var(--font-mono); font-style:normal; font-size:0.6rem; letter-spacing:4px; opacity:0.55; margin-top:2px; }
+  nav ul{ list-style:none; display:flex; gap:1.8rem; flex-wrap:wrap; justify-content:flex-end; }
+  nav a{
+    font-family:var(--font-mono); font-size:0.68rem; letter-spacing:1.5px;
+    text-transform:uppercase; position:relative; padding-bottom:4px;
+  }
+  nav a.active{ color:var(--cobalt); }
+  nav a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background:currentColor; transition:width 0.35s ease;
+  }
+  nav a:hover::after, nav a.active::after{ width:100%; }
+
+  @media (max-width:900px){
+    header{ flex-direction:column; gap:1.2rem; padding:1.8rem 1.5rem; }
+    nav ul{ gap:1.1rem; justify-content:center; }
+  }
+
+  .page-header{
+    padding:12rem 5.5rem 4rem;
+    max-width:1200px;
+    margin:0 auto;
+    border-bottom:1px solid rgba(18,17,15,0.12);
+  }
+
+  .page-header .kicker{
+    font-family:var(--font-mono);
+    font-size:0.75rem;
+    letter-spacing:3px;
+    color:var(--cobalt);
+    text-transform:uppercase;
+    margin-bottom:1.2rem;
+    display:flex;
+    align-items:center;
+    gap:0.8rem;
+  }
+  .page-header .kicker::before{ content:''; width:24px; height:1px; background:var(--cobalt); }
+
+  .page-header h1{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-weight:600;
+    font-size:clamp(2.6rem, 6vw, 4.6rem);
+    line-height:1.05;
+    max-width:900px;
+  }
+
+  .page-header p.lede{
+    margin-top:1.6rem;
+    max-width:560px;
+    color:var(--smoke);
+    font-size:1.02rem;
+  }
+
+  @media (max-width:900px){ .page-header{ padding:9rem 1.8rem 3rem; } }
+
+  .filter-bar{
+    max-width:1500px;
+    margin:0 auto;
+    padding:2.2rem 5.5rem 0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:1rem;
+  }
+  .filter-bar .count{ font-family:var(--font-mono); font-size:0.72rem; letter-spacing:1px; color:var(--smoke); }
+  .filter-tabs{ display:flex; gap:2rem; }
+  .filter-tabs button{
+    background:none; border:none; cursor:pointer;
+    font-family:var(--font-mono); font-size:0.72rem; letter-spacing:1.5px;
+    text-transform:uppercase; color:var(--smoke); padding-bottom:4px;
+    border-bottom:1px solid transparent;
+    transition:color 0.3s ease, border-color 0.3s ease;
+  }
+  .filter-tabs button.active, .filter-tabs button:hover{ color:var(--ink); border-color:var(--ink); }
+
+  @media (max-width:900px){
+    .filter-bar{ padding:2rem 1.8rem 0; }
+    .filter-tabs{ gap:1.2rem; flex-wrap:wrap; }
+  }
+
+  .collection-grid{
+    max-width:1500px;
+    margin:0 auto;
+    padding:4rem 5.5rem 7rem;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:3rem 2.4rem;
+  }
+
+  .piece{ opacity:0; transform:translateY(30px); transition:opacity 0.8s ease, transform 0.8s ease; }
+  .piece.is-visible{ opacity:1; transform:translateY(0); }
+
+  .piece-frame{
+    position:relative; overflow:hidden; cursor:zoom-in;
+    background:linear-gradient(100deg, #ccd6de 30%, #dde5ea 50%, #ccd6de 70%);
+    background-size:200% 100%;
+    animation:shimmer 1.6s infinite linear;
+    margin-bottom:1.4rem;
+  }
+  .piece-frame.img-ready{ animation:none; background:none; }
+  @keyframes shimmer{ 0%{ background-position:200% 0; } 100%{ background-position:-200% 0; } }
+
+  .piece-frame img{
+    width:100%; height:100%; display:block; object-fit:cover;
+    aspect-ratio:3/4;
+    filter:saturate(1.05) contrast(1.03);
+    opacity:0;
+    transition:opacity 0.5s ease, filter 0.6s ease, transform 0.6s ease;
+  }
+  .piece-frame img.is-loaded{ opacity:1; }
+  .piece-frame:hover img{ filter:saturate(1.15) contrast(1.06); transform:scale(1.03); }
+
+  .piece-code{
+    position:absolute; top:0.9rem; left:0.9rem;
+    font-family:var(--font-mono); font-size:0.66rem; letter-spacing:1px;
+    color:var(--bone); background:rgba(18,17,15,0.6); padding:0.28rem 0.6rem;
+  }
+  .piece-frame .piece-status{
+    position:absolute; top:0.9rem; right:0.9rem;
+    font-family:var(--font-mono); font-size:0.62rem; letter-spacing:1.5px;
+    text-transform:uppercase; color:var(--bone); background:rgba(43,74,107,0.8); padding:0.28rem 0.6rem;
+  }
+
+  .piece-meta .piece-cat{
+    font-family:var(--font-mono); font-size:0.66rem; letter-spacing:1.5px;
+    text-transform:uppercase; color:var(--smoke); margin-bottom:0.5rem;
+  }
+  .piece-meta h3{
+    font-family:var(--font-display); font-weight:600; font-size:1.35rem;
+    margin-bottom:0.5rem; line-height:1.2;
+  }
+  .piece-meta h3 a{ transition:color 0.3s ease; }
+  .piece-meta h3 a:hover{ color:var(--cobalt); }
+  .piece-meta .piece-price{ font-family:var(--font-mono); font-size:0.85rem; color:var(--ink); }
+
+  @media (max-width:1150px){ .collection-grid{ grid-template-columns:repeat(2, 1fr); } }
+  @media (max-width:900px){ .collection-grid{ grid-template-columns:1fr; padding:3rem 1.8rem 4rem; gap:3rem; } }
+
+  .cta-strip{
+    background:var(--ink); color:var(--bone); text-align:center; padding:6rem 2rem;
+  }
+  .cta-strip .quote-mark{
+    font-family:var(--font-display); font-style:italic; font-size:3.6rem;
+    color:var(--cobalt); line-height:1; margin-bottom:0.8rem; opacity:0.85;
+  }
+  .cta-strip h3{
+    font-family:var(--font-display); font-style:italic; font-weight:400;
+    font-size:clamp(1.4rem, 2.8vw, 2.1rem); max-width:700px; margin:0 auto 2rem; line-height:1.4;
+  }
+  .cta-strip .btn-invert{
+    display:inline-flex; align-items:center; gap:0.6rem;
+    font-family:var(--font-mono); font-size:0.72rem; letter-spacing:1.5px; text-transform:uppercase;
+    padding:1rem 2.2rem; border:1px solid var(--bone);
+    transition:background 0.3s ease, color 0.3s ease;
+  }
+  .cta-strip .btn-invert:hover{ background:var(--bone); color:var(--ink); }
+
+  .lightbox{
+    position:fixed; inset:0; background:rgba(18,17,15,0.94); z-index:200;
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; pointer-events:none; transition:opacity 0.3s ease;
+  }
+  .lightbox.is-open{ opacity:1; pointer-events:auto; }
+  .lightbox img{ max-width:min(85vw, 900px); max-height:85vh; object-fit:contain; box-shadow:0 20px 60px rgba(0,0,0,0.5); }
+  .lightbox-caption{
+    position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%);
+    text-align:center; color:var(--bone); font-family:var(--font-display); font-style:italic; font-size:1.1rem;
+  }
+  .lightbox-close, .lightbox-prev, .lightbox-next{
+    position:absolute; background:none; border:1px solid var(--bone); color:var(--bone);
+    cursor:pointer; font-family:var(--font-mono);
+    display:flex; align-items:center; justify-content:center;
+    transition:background 0.3s ease, color 0.3s ease;
+  }
+  .lightbox-close{ top:1.8rem; right:1.8rem; width:42px; height:42px; font-size:1rem; }
+  .lightbox-prev, .lightbox-next{ top:50%; transform:translateY(-50%); width:46px; height:46px; font-size:1.2rem; }
+  .lightbox-prev{ left:1.8rem; } .lightbox-next{ right:1.8rem; }
+  .lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover{ background:var(--bone); color:var(--ink); }
+
+  @media (max-width:900px){
+    .lightbox img{ max-width:92vw; }
+    .lightbox-prev, .lightbox-next{ width:38px; height:38px; }
+    .lightbox-close{ width:38px; height:38px; top:1.2rem; right:1.2rem; }
+    .lightbox-prev{ left:0.6rem; } .lightbox-next{ right:0.6rem; }
+  }
+
+  footer{
+    padding:5rem 5.5rem 3rem; display:flex; flex-direction:column; align-items:center; gap:1.4rem;
+    border-top:1px solid rgba(18,17,15,0.12);
+  }
+  .footer-logo{ font-family:var(--font-display); font-style:italic; font-size:1.4rem; transition:color 0.3s ease; }
+  .footer-logo:hover{ color:var(--cobalt); }
+  .socials{ display:flex; gap:2rem; }
+  .socials a{
+    font-family:var(--font-mono); font-size:0.72rem; letter-spacing:1.5px;
+    text-transform:uppercase; color:var(--smoke); transition:color 0.3s ease;
+  }
+  .socials a:hover{ color:var(--cobalt); }
+  footer p.copyright{ font-family:var(--font-mono); font-size:0.68rem; color:var(--smoke); letter-spacing:0.5px; }
+  footer p.credit{
+    font-family:var(--font-mono); font-size:0.62rem; color:var(--smoke);
+    letter-spacing:0.5px; opacity:0.75; margin-top:0.4rem;
+  }
+  footer p.credit a{ color:inherit; border-bottom:1px solid currentColor; }
+  @media (max-width:900px){ footer{ padding:4rem 1.8rem 2.5rem; } }
+
+  .back-to-top{
+    position:fixed; bottom:1.8rem; right:1.8rem; width:42px; height:42px;
+    border:1px solid var(--ink); background:var(--bone); color:var(--ink);
+    font-family:var(--font-mono); font-size:0.85rem;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; opacity:0; pointer-events:none; transform:translateY(8px);
+    transition:opacity 0.35s ease, transform 0.35s ease, background 0.3s ease, color 0.3s ease;
+    z-index:60;
+  }
+  .back-to-top.is-visible{ opacity:0.85; pointer-events:auto; transform:translateY(0); }
+  .back-to-top:hover{ opacity:1; background:var(--ink); color:var(--bone); }
+  @media (max-width:900px){ .back-to-top{ bottom:1.2rem; right:1.2rem; width:38px; height:38px; } }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .piece{ transition:none; opacity:1; transform:none; }
+    .piece-frame{ animation:none; background:#dde5ea; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="grain"></div>
+
+  <div class="timecode-rail">
+    <span><span class="dot"></span><span id="tc-value">00:00:00:12</span></span>
+  </div>
+
+  <header>
+    <a href="maison-editorial-final.html" class="logo">Home.Sake<small>Éditorial — Paris</small></a>
+    <nav>
+      <ul>
+        <li><a href="maison-editorial-final.html#editorial">Éditorial</a></li>
+        <li><a href="collections.html">Collections</a></li>
+        <li><a href="collections-erosion-ss27.html">Érosion SS27</a></li>
+        <li><a href="collections-ete-2027.html" class="active">Été 2027</a></li>
+        <li><a href="vintage.html">Vintage</a></li>
+        <li><a href="making-of.html">Making-Of</a></li>
+        <li><a href="la-maison.html">La Maison</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <p class="kicker">Capsule 05 — Été 2027</p>
+      <h1>Un même bleu, du matin à la nuit tombée.</h1>
+      <p class="lede">Dix pièces tournées comme un seul été continu — plage, ville, jetée, mer. Le cobalt revient partout, jamais deux fois de la même façon.</p>
+    </section>
+
+    <div class="filter-bar">
+      <div class="filter-tabs">
+        <button class="active" data-filter="all">Tout voir</button>
+        <button data-filter="maillots">Maillots</button>
+        <button data-filter="robes">Robes</button>
+        <button data-filter="ensembles">Ensembles</button>
+      </div>
+      <p class="count"><span id="piece-count">10</span> pièces — Été 2027</p>
+    </div>
+
+    <div class="collection-grid" id="collection-grid">
+
+      <article class="piece" data-frame data-cat="robes">
+        <div class="piece-frame">
+          <span class="piece-code">ET.01</span>
+          <img src="ete2027-01-heure-bleue.jpg" alt="Robe satin bleu électrique, femme assise sur un muret en béton au coucher du soleil">
+        </div>
+        <div class="piece-meta">
+          <p class="piece-cat">Robe — Prise 01</p>
+          <h3><a href="produit-heure-bleue.html">L'Heure Bleue</a></h3>
+          <p class="piece-price">420 €</p>
+        </div>
+      </article>
+
+      <article class="piece" data-frame data-cat="ensembles">
+        <div class="piece-frame">
+          <span class="piece-code">ET.02</span>
+          <span class="piece-status">Pièce rare</span>
+          <img src="ete2027-02-coupevent-metallise.jpg" alt="Coupe-vent bleu métallisé et brassière blanche, grillage urbain">
+        </div>
+        <div class="piece-meta">
+          <p class="piece-cat">Ensemble — Prise 02</p>
+          <h3><a href="produit-coupevent-metallise.html">Le Coupe-Vent Métallisé</a></h3>
+          <p class="piece-price">380 €</p>
+        </div>
+      </article>
+
+      <article class="piece" data-frame data-cat="maillots">
+        <div class="piece-frame">
+          <span class="piece-code">ET.03</span>
+          <img src="ete2027-03-bikini-rayures.jpg" alt="Bikini bleu ardoise sur serviette rayée, plage">
+        </div>
+        <div class="piece-meta">
+          <p class="piece-cat">Maillot — Prise 03</p>
+          <h3><a href="produit-bikini-rayures.html">Le Bikini Rayures</a></h3>
+          <p class="piece-price">180 €</p>
+        </div>
+      </article>
+
+      <article class="piece" data-frame data-cat="maillots">
+        <div class="piece-frame">
+          <span class="piece-code">ET.04</span>
+          <img src="ete2027-04-maillot-lame.jpg" alt="Maillot une pièce bleu lamé, silhouette dans les vagues">
+        </div>
+        <div class="piece-meta">
+          <p class="piece-cat">Maillot — Prise 04</p>
+          <h3><a href="produit-maillot-lame.html">Le Maillot Lamé</a></h3>
+          <p class="piece-price">220 €</p>
+        </div>
+      </article>
+
+      <article class="piece" data-frame data-cat="robes">
+        <div class="piece-frame">
+          <span class="piece-code">ET.05</span>
+          <img src="ete2027-05-robe-transparente.jpg" alt="Robe voile bleue transparente, accroupie sur un ponton en bois">
+        </div>
+        <div class="piece-meta">
+          <p class="piece-cat">Robe — Prise 05</p>
+          <h3><a href="produit-robe-transparente-ete.html">La Robe Transparente</a></h3>
+          <p class="piece-price">340 €</p>
+        </div>
+      </article>
+
+      <article class="piece" data-frame data-cat="ensembles">
+        <div class="piece-frame">
+          <span class="piece-code">ET.06</span>
+          <img src="ete2027-06-crop-marine.jpg" alt="Crop top bleu et pantalon cargo, promenade bordée de palmiers">
+        </div>
+        <div class="piece-meta">
+          <p class="piece-cat">Ensemble — Prise 06</p>
+          <h3><a href="produit-crop-marine.html">Le Crop Marine</a></h3>
+          <p class="piece-price">260 €</p>
+        </div>
+      </article>
+
+      <article class="piece" data-frame data-cat="maillots">
+        <div class="piece-frame">
+          <span class="piece-code">ET.07</span>
+          <img src="ete2027-07-maillot-ajoure.jpg" alt="Maillot une pièce bleu ajouré, assise sur un rocher au bord de mer">
+        </div>
+        <div class="piece-meta">
+          <p class="piece-cat">Maillot — Prise 07</p>
+          <h3><a href="produit-maillot-ajoure.html">Le Maillot Ajouré</a></h3>
+          <p class="piece-price">240 €</p>
+        </div>
+      </article>
+
+      <article class="piece" data-frame data-cat="robes">
+        <div class="piece-frame">
+          <span class="piece-code">ET.08</span>
+          <span class="piece-status">Pièce rare</span>
+          <img src="ete2027-08-pareo-du-soir.jpg" alt="Paréo bleu transparent sur maillot, rue de Miami au coucher du soleil">
+        </div>
+        <div class="piece-meta">
+          <p class="piece-cat">Robe — Prise 08</p>
+          <h3><a href="produit-pareo-du-soir.html">Le Paréo du Soir</a></h3>
+          <p class="piece-price">210 €</p>
+        </div>
+      </article>
+
+      <article class="piece" data-frame data-cat="maillots">
+        <div class="piece-frame">
+          <span class="piece-code">ET.09</span>
+          <img src="ete2027-09-bandeau-bleu-roi.jpg" alt="Bikini bandeau bleu roi, silhouette dans la mer">
+        </div>
+        <div class="piece-meta">
+          <p class="piece-cat">Maillot — Prise 09</p>
+          <h3><a href="produit-bandeau-bleu-roi.html">Le Bandeau Bleu Roi</a></h3>
+          <p class="piece-price">190 €</p>
+        </div>
+      </article>
+
+      <article class="piece" data-frame data-cat="robes">
+        <div class="piece-frame">
+          <span class="piece-code">ET.10</span>
+          <img src="ete2027-10-kimono-fleuri.jpg" alt="Maillot bleu ajouré sous un kimono fleuri transparent, dans l'eau">
+        </div>
+        <div class="piece-meta">
+          <p class="piece-cat">Robe de plage — Prise 10</p>
+          <h3><a href="produit-kimono-fleuri.html">Le Kimono Fleuri</a></h3>
+          <p class="piece-price">290 €</p>
+        </div>
+      </article>
+
+    </div>
+
+    <section class="cta-strip">
+      <p class="quote-mark">"</p>
+      <h3>Un été qui ne cherche pas à durer — juste à être retenu, une prise à la fois.</h3>
+      <a href="contact.html" class="btn-invert">Être alerté des prochaines capsules</a>
+    </section>
+  </main>
+
+  <footer>
+    <a href="collections.html" class="footer-logo">Home.Sake</a>
+    <div class="socials">
+      <a href="#">Instagram</a>
+      <a href="#">Pinterest</a>
+      <a href="#">Journal</a>
+    </div>
+    <p class="copyright">&copy; 2027 HOME.SAKE Éditorial. Tous droits réservés.</p>
+    <p class="credit"><a href="the-studio.html">Direction créative & production visuelle — Stampede Production</a></p>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Remonter en haut de page">↑</button>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Fermer">✕</button>
+    <button class="lightbox-prev" id="lightbox-prev" aria-label="Pièce précédente">←</button>
+    <img id="lightbox-img" src="" alt="">
+    <p class="lightbox-caption" id="lightbox-caption"></p>
+    <button class="lightbox-next" id="lightbox-next" aria-label="Pièce suivante">→</button>
+  </div>
+
+  <script>
+    const tc = document.getElementById('tc-value');
+    function formatTC(totalFrames){
+      const fps = 24;
+      const h = String(Math.floor(totalFrames/(fps*3600))).padStart(2,'0');
+      const m = String(Math.floor((totalFrames/(fps*60))%60)).padStart(2,'0');
+      const s = String(Math.floor((totalFrames/fps)%60)).padStart(2,'0');
+      const f = String(Math.floor(totalFrames%fps)).padStart(2,'0');
+      return `${h}:${m}:${s}:${f}`;
+    }
+    function updateTimecode(){
+      const scrollFraction = window.scrollY / (document.body.scrollHeight - window.innerHeight || 1);
+      const totalFrames = Math.floor(scrollFraction * 24 * 240);
+      tc.textContent = formatTC(totalFrames);
+    }
+    window.addEventListener('scroll', updateTimecode, { passive:true });
+    updateTimecode();
+
+    document.querySelectorAll('.piece-frame img').forEach(img=>{
+      const frame = img.closest('.piece-frame');
+      function markLoaded(){ img.classList.add('is-loaded'); frame.classList.add('img-ready'); }
+      if(img.complete && img.naturalWidth > 0){ markLoaded(); }
+      else { img.addEventListener('load', markLoaded); img.addEventListener('error', markLoaded); }
+    });
+
+    const pieces = document.querySelectorAll('[data-frame]');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+    }, { threshold:0.15 });
+    pieces.forEach(p=>io.observe(p));
+
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', ()=>{
+      if(window.scrollY > window.innerHeight * 0.6){ backToTop.classList.add('is-visible'); }
+      else { backToTop.classList.remove('is-visible'); }
+    }, { passive:true });
+    backToTop.addEventListener('click', ()=>{ window.scrollTo({ top:0, behavior:'smooth' }); });
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const lightboxPrev = document.getElementById('lightbox-prev');
+    const lightboxNext = document.getElementById('lightbox-next');
+
+    const allPieceEls = Array.from(document.querySelectorAll('.piece'));
+    const gallery = allPieceEls.map(el=>{
+      const img = el.querySelector('.piece-frame img');
+      const title = el.querySelector('.piece-meta h3');
+      return { src: img?.getAttribute('src'), alt: img?.getAttribute('alt'), title: title?.textContent };
+    }).filter(item=>item.src);
+
+    let currentIndex = 0;
+    function openLightbox(index){
+      currentIndex = index;
+      const item = gallery[currentIndex];
+      lightboxImg.src = item.src; lightboxImg.alt = item.alt || '';
+      lightboxCaption.textContent = item.title || '';
+      lightbox.classList.add('is-open');
+    }
+    function closeLightbox(){ lightbox.classList.remove('is-open'); }
+    function showRelative(delta){
+      currentIndex = (currentIndex + delta + gallery.length) % gallery.length;
+      openLightbox(currentIndex);
+    }
+    allPieceEls.forEach((el, index)=>{
+      const frame = el.querySelector('.piece-frame');
+      if(frame){ frame.addEventListener('click', ()=>openLightbox(index)); }
+    });
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxPrev.addEventListener('click', ()=>showRelative(-1));
+    lightboxNext.addEventListener('click', ()=>showRelative(1));
+    lightbox.addEventListener('click', (e)=>{ if(e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e)=>{
+      if(!lightbox.classList.contains('is-open')) return;
+      if(e.key === 'Escape') closeLightbox();
+      if(e.key === 'ArrowLeft') showRelative(-1);
+      if(e.key === 'ArrowRight') showRelative(1);
+    });
+
+    // Filter tabs
+    const tabs = document.querySelectorAll('.filter-tabs button');
+    const countEl = document.getElementById('piece-count');
+    tabs.forEach(tab=>{
+      tab.addEventListener('click', ()=>{
+        tabs.forEach(t=>t.classList.remove('active'));
+        tab.classList.add('active');
+        const filter = tab.dataset.filter;
+        let visibleCount = 0;
+        pieces.forEach(p=>{
+          const match = filter === 'all' || p.dataset.cat === filter;
+          p.style.display = match ? '' : 'none';
+          if(match) visibleCount++;
+        });
+        countEl.textContent = visibleCount;
+      });
+    });
+  </script>
+
+</body>
+</html>
