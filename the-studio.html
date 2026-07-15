@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOME.SAKE — The Studio</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="description" content="A note on process — how Home.Sake is imagined and directed by Stampede Production, entirely through artificial intelligence.">
+<meta property="og:title" content="HOME.SAKE — The Studio">
+<meta property="og:description" content="The image is imagined before it is made.">
+<meta property="og:image" content="hero.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12110F;
+    --bone:#EFE9DF;
+    --brass:#9C7A45;
+    --oxblood:#6B2E2A;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--ink);
+    color:var(--bone);
+    font-family:'Inter', sans-serif;
+    font-weight:300;
+    line-height:1.7;
+    overflow-x:hidden;
+  }
+
+  a{ text-decoration:none; color:inherit; }
+  ::selection{ background:var(--brass); color:var(--ink); }
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--brass); outline-offset:3px; }
+
+  /* film grain overlay, consistent with the rest of the site */
+  .grain{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:999;
+    opacity:0.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;
+  }
+
+  /* --- timecode rail, consistent with the rest of the site --- */
+  .timecode-rail{
+    position:fixed; left:1.4rem; top:0; height:100vh;
+    display:flex; align-items:center; z-index:50; pointer-events:none;
+  }
+  .timecode-rail span{
+    font-family:'Space Mono', monospace; font-size:0.7rem; letter-spacing:2px;
+    color:var(--bone); opacity:0.5; writing-mode:vertical-rl;
+    transform:rotate(180deg); display:flex; align-items:center; gap:0.6rem;
+  }
+  .timecode-rail .dot{ width:5px; height:5px; border-radius:50%; background:var(--brass); writing-mode:horizontal-tb; }
+  @media (max-width:900px){ .timecode-rail{ display:none; } }
+
+  /* --- lang toggle --- */
+  .lang-toggle{
+    display:flex;
+    border:1px solid rgba(239,233,223,0.35);
+    font-family:'Space Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:1px;
+    overflow:hidden;
+  }
+  .lang-toggle button{
+    background:none; border:none; color:rgba(239,233,223,0.55);
+    padding:0.45rem 0.8rem; cursor:pointer;
+    transition:background 0.3s ease, color 0.3s ease;
+  }
+  .lang-toggle button.active{ background:var(--brass); color:var(--ink); }
+  .lang-toggle button:not(.active):hover{ color:var(--bone); }
+
+  /* --- header --- */
+  header{
+    position:relative;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:1.2rem;
+    padding:2.2rem 4rem 2.2rem 5.5rem;
+    z-index:40;
+  }
+  .wordmark{
+    font-family:'Bodoni Moda', serif;
+    font-style:italic;
+    font-size:1.4rem;
+    letter-spacing:0.04em;
+    color:var(--bone);
+  }
+  .wordmark small{
+    display:block; font-family:'Space Mono', monospace; font-style:normal;
+    font-size:0.6rem; letter-spacing:4px; opacity:0.5; margin-top:2px; text-transform:uppercase;
+  }
+  nav ul{ list-style:none; display:flex; gap:2rem; flex-wrap:wrap; }
+  nav a{
+    font-family:'Space Mono', monospace; font-size:0.7rem; letter-spacing:1.5px;
+    text-transform:uppercase; color:var(--bone); position:relative; padding-bottom:4px;
+  }
+  nav a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background:currentColor; transition:width 0.35s ease;
+  }
+  nav a:hover::after{ width:100%; }
+
+  @media (max-width:900px){
+    header{ flex-direction:column; align-items:flex-start; padding:1.8rem 1.5rem; }
+    nav ul{ gap:1.1rem; }
+  }
+
+  /* --- hero --- */
+  .hero{
+    min-height:80vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:2rem 3rem 4rem 5.5rem;
+    max-width:900px;
+  }
+  @media (max-width:900px){ .hero{ padding:2rem 1.5rem 3rem; min-height:60vh; } }
+
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:0.75rem;
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    color:var(--brass);
+    margin-bottom:1.5rem;
+    display:flex; align-items:center; gap:0.8rem;
+  }
+  .eyebrow::before{ content:''; width:24px; height:1px; background:var(--brass); }
+
+  h1{
+    font-family:'Bodoni Moda', serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:clamp(2.4rem, 6vw, 4.2rem);
+    line-height:1.15;
+    max-width:14ch;
+    color:var(--bone);
+  }
+  .hero p{
+    margin-top:2rem;
+    max-width:46ch;
+    font-size:1.05rem;
+    color:rgba(239,233,223,0.72);
+  }
+
+  /* --- reveal sections --- */
+  section.block{
+    padding:6rem 3rem 6rem 5.5rem;
+    max-width:820px;
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity 1s ease, transform 1s ease;
+  }
+  section.block.visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+  @media (max-width:900px){ section.block{ padding:4rem 1.5rem; } }
+
+  section.block .label{
+    font-family:'Space Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--brass);
+    display:block;
+    margin-bottom:1.2rem;
+  }
+  section.block h2{
+    font-family:'Bodoni Moda', serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:1.9rem;
+    margin-bottom:1.4rem;
+    color:var(--bone);
+  }
+  section.block p{
+    color:rgba(239,233,223,0.75);
+    font-size:1rem;
+    margin-bottom:1.2rem;
+  }
+  section.block p.emphasis{
+    color:var(--bone);
+    font-family:'Bodoni Moda', serif;
+    font-style:italic;
+    font-size:1.15rem;
+    border-left:1px solid var(--brass);
+    padding-left:1.4rem;
+  }
+
+  hr.rule{
+    border:none;
+    border-top:1px solid rgba(156,122,69,0.35);
+    max-width:820px;
+    margin:0 3rem 0 5.5rem;
+  }
+  @media (max-width:900px){ hr.rule{ margin:0 1.5rem; } }
+
+  /* --- footer --- */
+  footer{
+    padding:5rem 3rem 4rem 5.5rem;
+    max-width:820px;
+    border-top:1px solid rgba(239,233,223,0.12);
+  }
+  @media (max-width:900px){ footer{ padding:4rem 1.5rem 3rem; } }
+
+  footer .disclosure{
+    font-size:0.85rem;
+    line-height:1.8;
+    color:rgba(239,233,223,0.55);
+    max-width:52ch;
+  }
+  footer .disclosure strong{
+    color:var(--bone);
+    font-weight:400;
+    font-style:italic;
+    font-family:'Bodoni Moda', serif;
+  }
+  footer .meta{
+    margin-top:2.5rem;
+    font-family:'Space Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.1em;
+    color:rgba(156,122,69,0.6);
+  }
+  footer .back-home{
+    display:inline-block;
+    margin-top:2.5rem;
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--bone);
+    border-bottom:1px solid rgba(239,233,223,0.35);
+    padding-bottom:3px;
+    transition:color 0.3s ease, border-color 0.3s ease;
+  }
+  footer .back-home:hover{
+    color:var(--brass);
+    border-color:var(--brass);
+  }
+
+  /* --- back to top --- */
+  .back-to-top{
+    position:fixed; bottom:1.8rem; right:1.8rem;
+    width:42px; height:42px;
+    border:1px solid var(--bone); background:var(--ink); color:var(--bone);
+    font-family:'Space Mono', monospace; font-size:0.85rem;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; opacity:0; pointer-events:none; transform:translateY(8px);
+    transition:opacity 0.35s ease, transform 0.35s ease, background 0.3s ease, color 0.3s ease;
+    z-index:60;
+  }
+  .back-to-top.is-visible{ opacity:0.85; pointer-events:auto; transform:translateY(0); }
+  .back-to-top:hover{ opacity:1; background:var(--bone); color:var(--ink); }
+  @media (max-width:900px){ .back-to-top{ bottom:1.2rem; right:1.2rem; width:38px; height:38px; } }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    section.block{transition:none; opacity:1; transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<div class="timecode-rail">
+  <span><span class="dot"></span><span id="tc-value">00:00:00:12</span></span>
+</div>
+
+<header>
+  <a href="maison-editorial-final.html" class="wordmark">Home.Sake<small>The Studio</small></a>
+  <nav>
+    <ul>
+      <li><a href="maison-editorial-final.html#editorial">Éditorial</a></li>
+      <li><a href="collections.html">Collections</a></li>
+      <li><a href="collections-erosion-ss27.html">Érosion SS27</a></li>
+      <li><a href="collections-ete-2027.html">Été 2027</a></li>
+      <li><a href="vintage.html">Vintage</a></li>
+      <li><a href="making-of.html">Making-Of</a></li>
+      <li><a href="la-maison.html">La Maison</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="lang-toggle">
+    <button type="button" data-lang-btn="en" class="active">EN</button>
+    <button type="button" data-lang-btn="fr">FR</button>
+  </div>
+</header>
+
+<div class="hero">
+  <span class="eyebrow" data-en="A note on process" data-fr="Une note sur le processus">A note on process</span>
+  <h1 data-en="The image is imagined before it is made." data-fr="L'image est imaginée avant d'être faite.">The image is imagined before it is made.</h1>
+  <p data-en="Home.Sake is a house of visual fiction — a place where a season, a mood, a face can exist fully formed without ever being staged in front of a camera." data-fr="Home.Sake est une maison de fiction visuelle — un lieu où une saison, une atmosphère, un visage peuvent exister pleinement sans jamais avoir été mis en scène devant une caméra.">Home.Sake is a house of visual fiction — a place where a season, a mood, a face can exist fully formed without ever being staged in front of a camera.</p>
+</div>
+
+<hr class="rule">
+
+<section class="block">
+  <span class="label" data-en="01 — The Method" data-fr="01 — La Méthode">01 — The Method</span>
+  <h2 data-en="Every frame here begins as an idea, not a shoot." data-fr="Chaque image ici commence comme une idée, pas comme une prise de vue.">Every frame here begins as an idea, not a shoot.</h2>
+  <p data-en="There is no set, no wardrobe rack, no model waiting between takes. Each image is directed — composed, lit, graded — through artificial intelligence, guided frame by frame toward the same cinematic language you'd expect from a physical production: Kodak-era grain, wide negative space, a camera that holds still so the subject can move." data-fr="Il n'y a ni décor, ni portant de vêtements, ni mannequin qui attend entre deux prises. Chaque image est dirigée — composée, éclairée, étalonnée — par intelligence artificielle, guidée plan par plan vers le même langage cinématographique qu'une production physique : grain façon Kodak, grand espace négatif, une caméra qui reste immobile pour laisser le sujet bouger.">There is no set, no wardrobe rack, no model waiting between takes. Each image is directed — composed, lit, graded — through artificial intelligence, guided frame by frame toward the same cinematic language you'd expect from a physical production: Kodak-era grain, wide negative space, a camera that holds still so the subject can move.</p>
+  <p class="emphasis" data-en="The camera is imagined. The direction is not." data-fr="La caméra est imaginaire. La direction ne l'est pas.">The camera is imagined. The direction is not.</p>
+</section>
+
+<section class="block">
+  <span class="label" data-en="02 — Why It's Built This Way" data-fr="02 — Pourquoi c'est construit ainsi">02 — Why It's Built This Way</span>
+  <h2 data-en="Analog imperfection is intentional." data-fr="L'imperfection analogique est intentionnelle.">Analog imperfection is intentional.</h2>
+  <p data-en="We could make these images clean, symmetrical, frictionless — the way a machine naturally renders. Instead we chase grain, drift, the soft failure of an old lens. It's a discipline, not a disguise: a way of proving that a synthetic process can still hold restraint, patience, and taste." data-fr="Nous pourrions rendre ces images propres, symétriques, sans friction — comme une machine le ferait naturellement. Nous préférons chercher le grain, la dérive, la douce imperfection d'un vieil objectif. C'est une discipline, pas un déguisement : une façon de prouver qu'un procédé synthétique peut garder de la retenue, de la patience et du goût.">We could make these images clean, symmetrical, frictionless — the way a machine naturally renders. Instead we chase grain, drift, the soft failure of an old lens. It's a discipline, not a disguise: a way of proving that a synthetic process can still hold restraint, patience, and taste.</p>
+</section>
+
+<section class="block">
+  <span class="label" data-en="03 — Who's Behind It" data-fr="03 — Qui est derrière">03 — Who's Behind It</span>
+  <h2 data-en="Stampede Production." data-fr="Stampede Production.">Stampede Production.</h2>
+  <p data-en="Home.Sake is directed by Stampede Production, a visual direction studio working at the intersection of fashion editorial and artificial intelligence. This site is both a house of its own and a demonstration of what that direction can do for other maisons." data-fr="Home.Sake est dirigée par Stampede Production, un studio de direction visuelle à la croisée de l'éditorial mode et de l'intelligence artificielle. Ce site est à la fois une maison à part entière et une démonstration de ce que cette direction peut apporter à d'autres maisons.">Home.Sake is directed by Stampede Production, a visual direction studio working at the intersection of fashion editorial and artificial intelligence. This site is both a house of its own and a demonstration of what that direction can do for other maisons.</p>
+</section>
+
+<footer>
+  <p class="disclosure">
+    <strong>Home.Sake</strong> <span data-en="is an editorial studio. Every image, film, and face presented here is conceived and produced using artificial intelligence, directed under the analog visual language of Stampede Production." data-fr="est un studio éditorial. Chaque image, film et visage présentés ici est conçu et produit par intelligence artificielle, dirigé selon le langage visuel analogique de Stampede Production.">is an editorial studio. Every image, film, and face presented here is conceived and produced using artificial intelligence, directed under the analog visual language of Stampede Production.</span>
+  </p>
+  <p class="meta">STAMPEDE PRODUCTION — LYON — EST. MMXXVI</p>
+  <a href="maison-editorial-final.html" class="back-home" data-en="← Back to Home.Sake" data-fr="← Retour à Home.Sake">← Back to Home.Sake</a>
+</footer>
+
+<button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
+
+<script>
+  const tc = document.getElementById('tc-value');
+  function formatTC(totalFrames){
+    const fps = 24;
+    const h = String(Math.floor(totalFrames/(fps*3600))).padStart(2,'0');
+    const m = String(Math.floor((totalFrames/(fps*60))%60)).padStart(2,'0');
+    const s = String(Math.floor((totalFrames/fps)%60)).padStart(2,'0');
+    const f = String(Math.floor(totalFrames%fps)).padStart(2,'0');
+    return `${h}:${m}:${s}:${f}`;
+  }
+  function updateTimecode(){
+    const scrollFraction = window.scrollY / (document.body.scrollHeight - window.innerHeight || 1);
+    const totalFrames = Math.floor(scrollFraction * 24 * 240);
+    tc.textContent = formatTC(totalFrames);
+  }
+  window.addEventListener('scroll', updateTimecode, { passive:true });
+  updateTimecode();
+
+  const blocks = document.querySelectorAll('section.block');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.2 });
+  blocks.forEach(b => io.observe(b));
+
+  const backToTop = document.getElementById('back-to-top');
+  window.addEventListener('scroll', ()=>{
+    if(window.scrollY > window.innerHeight * 0.6){ backToTop.classList.add('is-visible'); }
+    else { backToTop.classList.remove('is-visible'); }
+  }, { passive:true });
+  backToTop.addEventListener('click', ()=>{
+    window.scrollTo({ top:0, behavior:'smooth' });
+  });
+
+  // Bascule EN / FR
+  const langButtons = document.querySelectorAll('[data-lang-btn]');
+  const translatable = document.querySelectorAll('[data-en][data-fr]');
+
+  function setLang(lang){
+    translatable.forEach(el=>{ el.textContent = el.dataset[lang]; });
+    langButtons.forEach(btn=>{ btn.classList.toggle('active', btn.dataset.langBtn === lang); });
+    document.documentElement.lang = lang;
+  }
+
+  langButtons.forEach(btn=>{
+    btn.addEventListener('click', ()=> setLang(btn.dataset.langBtn));
+  });
+</script>
+
+</body>
+</html>
