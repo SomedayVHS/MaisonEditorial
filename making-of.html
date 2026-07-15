@@ -244,6 +244,55 @@
     .mo-grid{ grid-template-columns:1fr; padding:0 1.8rem 2.5rem; gap:2.5rem; }
   }
 
+  /* ---------- ANNOUNCE BANNER ---------- */
+  .announce-banner{
+    max-width:1500px;
+    margin:0 auto;
+    padding:0 5.5rem 3rem;
+  }
+
+  .announce-banner a{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:1.5rem;
+    padding:1.4rem 2rem;
+    border:1px solid var(--brass);
+    background:rgba(156,122,69,0.06);
+    transition:background 0.3s ease;
+  }
+
+  .announce-banner a:hover{
+    background:rgba(156,122,69,0.14);
+  }
+
+  .announce-banner .announce-text{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    letter-spacing:0.5px;
+    color:var(--ink);
+  }
+
+  .announce-banner .announce-text b{
+    color:var(--oxblood);
+    font-family:var(--font-display);
+    font-style:italic;
+    font-size:1rem;
+    margin-right:0.6rem;
+  }
+
+  .announce-banner .announce-arrow{
+    font-family:var(--font-mono);
+    font-size:0.9rem;
+    color:var(--brass);
+    flex-shrink:0;
+  }
+
+  @media (max-width:900px){
+    .announce-banner{ padding:0 1.8rem 2rem; }
+    .announce-banner a{ flex-direction:column; align-items:flex-start; gap:0.6rem; }
+  }
+
   /* ---------- FOOTER ---------- */
   footer{
     padding:5rem 5.5rem 3rem;
@@ -346,6 +395,7 @@
       <ul>
         <li><a href="maison-editorial-final.html#editorial">Éditorial</a></li>
         <li><a href="collections.html">Collections</a></li>
+        <li><a href="collections-erosion-ss27.html">Érosion SS27</a></li>
         <li><a href="vintage.html">Vintage</a></li>
         <li><a href="making-of.html" class="active">Making-Of</a></li>
         <li><a href="la-maison.html">La Maison</a></li>
@@ -360,6 +410,13 @@
       <h1>Ce qui se passe avant que la prise soit gardée au montage.</h1>
       <p class="lede">Le making-of n'est pas là pour vendre — il est là pour montrer le processus. Chaque image ci-dessous est accompagnée du prompt qui l'a générée, parce qu'à HOME.SAKE la méthode n'a rien à cacher.</p>
     </section>
+
+    <div class="announce-banner">
+      <a href="making-of-la-loge.html">
+        <span class="announce-text"><b>La Loge</b>Making-of complet en 4 chapitres, Capsule 02 — préparation, pause, reprise, le plan.</span>
+        <span class="announce-arrow">→</span>
+      </a>
+    </div>
 
     <!-- CASTING -->
     <section class="mo-section">
@@ -541,7 +598,7 @@
       <a href="#">Journal</a>
     </div>
     <p class="copyright">&copy; 2026 HOME.SAKE Éditorial. Tous droits réservés.</p>
-    <p class="credit">Direction créative & production visuelle — Stampede Production</p>
+    <p class="credit"><a href="the-studio.html" style="color:inherit;border-bottom:1px solid currentColor;">Direction créative & production visuelle — Stampede Production</a></p>
   </footer>
 
   <button class="back-to-top" id="back-to-top" aria-label="Remonter en haut de page">↑</button>

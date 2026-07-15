@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOME.SAKE — La Loge (Making-Of)</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="description" content="La Loge — making-of de la Capsule 02 HOME.SAKE. Ce qui se joue avant le plan, chapitre par chapitre, avec les prompts qui l'ont généré.">
+<meta property="og:title" content="HOME.SAKE — La Loge (Making-Of)">
+<meta property="og:description" content="Ce qui se joue avant le plan — quatre chapitres, une chambre en bois, une lumière qui ne demande rien.">
+<meta property="og:image" content="hero.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  :root{
+    --ink:#12110F;
+    --ink-2:#1c1a17;
+    --bone:#EFE9DF;
+    --brass:#9C7A45;
+    --oxblood:#6B2E2A;
+    --smoke:#6E6A62;
+    --font-display:'Bodoni Moda', serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'Space Mono', monospace;
+    --line: rgba(239,233,223,0.14);
+  }
+
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--ink);
+    color:var(--bone);
+    font-family:var(--font-body);
+    font-weight:300;
+    overflow-x:hidden;
+  }
+  a{ text-decoration:none; color:inherit; }
+  ::selection{ background:var(--brass); color:var(--ink); }
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--brass); outline-offset:3px; }
+
+  .grain{
+    position:fixed; inset:0; pointer-events:none; z-index:999;
+    opacity:0.06; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  .timecode-rail{
+    position:fixed; left:1.4rem; top:0; height:100vh;
+    display:flex; align-items:center; z-index:50; pointer-events:none;
+  }
+  .timecode-rail span{
+    font-family:var(--font-mono); font-size:0.7rem; letter-spacing:2px;
+    color:var(--bone); opacity:0.5; writing-mode:vertical-rl;
+    transform:rotate(180deg); display:flex; align-items:center; gap:0.6rem;
+  }
+  .timecode-rail .dot{ width:5px; height:5px; border-radius:50%; background:var(--brass); writing-mode:horizontal-tb; }
+  @media (max-width:900px){ .timecode-rail{ display:none; } }
+
+  /* ---------- LANG TOGGLE ---------- */
+  .lang-toggle{
+    display:flex;
+    border:1px solid rgba(239,233,223,0.35);
+    font-family:var(--font-mono);
+    font-size:0.68rem;
+    letter-spacing:1px;
+    overflow:hidden;
+  }
+  .lang-toggle button{
+    background:none;
+    border:none;
+    color:rgba(239,233,223,0.55);
+    padding:0.45rem 0.8rem;
+    cursor:pointer;
+    transition:background 0.3s ease, color 0.3s ease;
+  }
+  .lang-toggle button.active{
+    background:var(--brass);
+    color:var(--ink);
+  }
+  .lang-toggle button:not(.active):hover{
+    color:var(--bone);
+  }
+
+  @media (max-width:900px){
+    .lang-toggle{ order:-1; }
+  }
+
+  /* ---------- HEADER ---------- */
+  header.site-header{
+    padding:2.2rem 4rem 2.2rem 5.5rem;
+    display:flex; justify-content:space-between; align-items:center;
+    position:relative; z-index:20;
+  }
+  .logo{ font-family:var(--font-display); font-style:italic; font-size:1.6rem; letter-spacing:1px; color:var(--bone); }
+  .logo small{ display:block; font-family:var(--font-mono); font-style:normal; font-size:0.6rem; letter-spacing:4px; opacity:0.55; margin-top:2px; }
+  nav ul{ list-style:none; display:flex; gap:2rem; flex-wrap:wrap; justify-content:flex-end; }
+  nav a{
+    font-family:var(--font-mono); font-size:0.7rem; letter-spacing:1.5px;
+    text-transform:uppercase; position:relative; padding-bottom:4px; color:var(--bone);
+  }
+  nav a.active{ color:var(--brass); }
+  nav a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background:currentColor; transition:width 0.35s ease;
+  }
+  nav a:hover::after, nav a.active::after{ width:100%; }
+
+  @media (max-width:900px){
+    header.site-header{ flex-direction:column; gap:1.2rem; padding:1.8rem 1.5rem; }
+    nav ul{ gap:1.1rem; justify-content:center; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:80vh; display:flex; flex-direction:column;
+    justify-content:flex-end; padding:3rem 5.5rem 4rem;
+    position:relative;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(107,46,42,0.25), transparent 55%),
+      linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 140%);
+    border-bottom:1px solid var(--line);
+  }
+  @media (max-width:900px){ .hero{ padding:2.5rem 1.8rem 3rem; min-height:60vh; } }
+
+  .eyebrow{
+    font-family:var(--font-mono); font-size:0.72rem;
+    letter-spacing:3px; text-transform:uppercase; color:var(--brass);
+    margin-bottom:1.4rem; display:flex; align-items:center; gap:0.8rem;
+  }
+  .eyebrow::before{ content:''; width:24px; height:1px; background:var(--brass); }
+
+  h1.title{
+    font-family:var(--font-display); font-style:italic; font-weight:600;
+    font-size:clamp(2.6rem, 8vw, 6.4rem); line-height:0.98; color:var(--bone);
+    max-width:14ch;
+  }
+  .subtitle{
+    font-size:clamp(0.95rem, 1.4vw, 1.1rem); color:rgba(239,233,223,0.65); max-width:46ch;
+    margin-top:1.6rem; line-height:1.65; font-style:italic; font-family:var(--font-display);
+  }
+  .meta-row{
+    display:flex; gap:2.6rem; margin-top:3rem; flex-wrap:wrap;
+    font-family:var(--font-mono); font-size:0.68rem;
+    letter-spacing:1.5px; color:rgba(239,233,223,0.55); text-transform:uppercase;
+  }
+  .meta-row span b{
+    color:var(--bone); display:block; font-family:var(--font-display); font-style:italic;
+    font-size:0.95rem; text-transform:none; letter-spacing:0; margin-top:4px;
+  }
+
+  main{ padding-left:0; }
+
+  /* ---------- CHAPTER ---------- */
+  .chapter{
+    position:relative;
+    padding:6rem 5.5rem;
+    border-bottom:1px solid var(--line);
+    opacity:0; transform:translateY(28px);
+    transition:opacity 0.9s ease, transform 0.9s ease;
+  }
+  .chapter.visible{ opacity:1; transform:translateY(0); }
+  @media (max-width:900px){ .chapter{ padding:4rem 1.8rem; } }
+
+  .chapter-head{ display:flex; align-items:baseline; gap:1.2rem; margin-bottom:0.5rem; }
+  .chapter-num{ font-family:var(--font-mono); font-size:0.8rem; color:var(--brass); letter-spacing:2px; }
+  .chapter-tc{ font-family:var(--font-mono); font-size:0.68rem; color:rgba(239,233,223,0.55); letter-spacing:1px; margin-left:auto; }
+  h2.chapter-title{
+    font-family:var(--font-display); font-style:italic; font-weight:600;
+    font-size:clamp(1.8rem, 4vw, 3.2rem); color:var(--bone); margin-bottom:2.2rem;
+  }
+
+  .frame-wrap{ display:grid; grid-template-columns:0.9fr 1fr; gap:3.4rem; align-items:start; }
+  @media (max-width:900px){ .frame-wrap{ grid-template-columns:1fr; gap:2rem; } }
+
+  .frame{
+    aspect-ratio:4/5; position:relative; overflow:hidden;
+    border:1px solid var(--line);
+    background:
+      radial-gradient(ellipse at 28% 22%, rgba(156,122,69,0.2), transparent 45%),
+      linear-gradient(160deg, #3a2c1f 0%, #1a1712 55%, #12110F 100%);
+  }
+  .frame::after{
+    content:""; position:absolute; inset:0;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity:0.18; mix-blend-mode:overlay;
+  }
+  .frame img{
+    position:relative; z-index:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    filter:sepia(10%) contrast(1.04);
+  }
+  .frame-label{
+    position:absolute; bottom:1rem; left:1rem;
+    font-family:var(--font-mono); font-size:0.62rem; letter-spacing:1.5px;
+    color:rgba(239,233,223,0.6); text-transform:uppercase;
+    border:1px solid rgba(239,233,223,0.3); padding:0.3rem 0.65rem;
+  }
+  .frame-tc-corner{
+    position:absolute; top:1rem; right:1rem;
+    font-family:var(--font-mono); font-size:0.62rem; color:rgba(239,233,223,0.4);
+  }
+
+  .prompt-block{
+    font-family:var(--font-mono); font-size:0.76rem; line-height:1.85;
+    color:rgba(239,233,223,0.65); background:var(--ink-2);
+    border-left:2px solid var(--brass); padding:1.3rem 1.5rem;
+  }
+  .caption{
+    font-family:var(--font-display); font-style:italic; font-size:1rem;
+    color:var(--bone); margin-top:1.3rem; line-height:1.6; max-width:52ch;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:4rem 5.5rem 3rem;
+    display:flex; flex-direction:column; align-items:center; gap:1.4rem;
+    border-top:1px solid var(--line);
+  }
+  .footer-logo{ font-family:var(--font-display); font-style:italic; font-size:1.4rem; color:var(--bone); transition:color 0.3s ease; }
+  .footer-logo:hover{ color:var(--brass); }
+  .socials{ display:flex; gap:2rem; }
+  .socials a{
+    font-family:var(--font-mono); font-size:0.72rem; letter-spacing:1.5px;
+    text-transform:uppercase; color:rgba(239,233,223,0.55); transition:color 0.3s ease;
+  }
+  .socials a:hover{ color:var(--brass); }
+  footer p.copyright{ font-family:var(--font-mono); font-size:0.68rem; color:rgba(239,233,223,0.5); letter-spacing:0.5px; }
+  footer p.credit{
+    font-family:var(--font-mono); font-size:0.62rem; color:rgba(239,233,223,0.4);
+    letter-spacing:0.5px; margin-top:0.4rem;
+  }
+  @media (max-width:900px){ footer{ padding:3rem 1.8rem 2.5rem; } }
+
+  /* ---------- BACK TO TOP ---------- */
+  .back-to-top{
+    position:fixed; bottom:1.8rem; right:1.8rem;
+    width:42px; height:42px;
+    border:1px solid var(--bone); background:var(--ink); color:var(--bone);
+    font-family:var(--font-mono); font-size:0.85rem;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; opacity:0; pointer-events:none; transform:translateY(8px);
+    transition:opacity 0.35s ease, transform 0.35s ease, background 0.3s ease, color 0.3s ease;
+    z-index:60;
+  }
+  .back-to-top.is-visible{ opacity:0.85; pointer-events:auto; transform:translateY(0); }
+  .back-to-top:hover{ opacity:1; background:var(--bone); color:var(--ink); }
+  @media (max-width:900px){ .back-to-top{ bottom:1.2rem; right:1.2rem; width:38px; height:38px; } }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<div class="timecode-rail">
+  <span><span class="dot"></span><span id="tc-value">00:00:00:12</span></span>
+</div>
+
+<header class="site-header">
+  <a href="maison-editorial-final.html" class="logo">Home.Sake<small>Éditorial — Paris</small></a>
+  <nav>
+    <ul>
+      <li><a href="maison-editorial-final.html#editorial">Éditorial</a></li>
+      <li><a href="collections.html">Collections</a></li>
+        <li><a href="collections-erosion-ss27.html">Érosion SS27</a></li>
+      <li><a href="vintage.html">Vintage</a></li>
+      <li><a href="making-of.html" class="active">Making-Of</a></li>
+      <li><a href="la-maison.html">La Maison</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="lang-toggle">
+    <button type="button" data-lang-btn="fr" class="active">FR</button>
+    <button type="button" data-lang-btn="en">EN</button>
+  </div>
+</header>
+
+<header class="hero">
+  <p class="eyebrow" data-fr="Making-of — Capsule 02" data-en="Making-Of — Capsule 02">Making-of — Capsule 02</p>
+  <h1 class="title">La Loge</h1>
+  <p class="subtitle" data-fr="Ce qui se joue avant le plan. Deux silhouettes, une chambre en bois, une lumière qui ne demande rien — le film 35mm capte l'instant d'avant le geste posé." data-en="What happens before the shot. Two silhouettes, a wood-paneled room, a light that asks for nothing — the 35mm film captures the moment just before the gesture settles.">Ce qui se joue avant le plan. Deux silhouettes, une chambre en bois, une lumière qui ne demande rien — le film 35mm capte l'instant d'avant le geste posé.</p>
+  <div class="meta-row">
+    <span><span data-fr="Lieu" data-en="Location">Lieu</span> <b data-fr="Chambre boisée, lumière naturelle" data-en="Wood-paneled room, natural light">Chambre boisée, lumière naturelle</b></span>
+    <span><span data-fr="Pellicule" data-en="Film Stock">Pellicule</span> <b>Kodak Vision3 500T</b></span>
+    <span><span data-fr="Séquence" data-en="Sequence">Séquence</span> <b data-fr="4 chapitres" data-en="4 chapters">4 chapitres</b></span>
+    <span><span data-fr="Direction" data-en="Direction">Direction</span> <b>Stampede Production</b></span>
+  </div>
+</header>
+
+<main>
+
+  <section class="chapter" id="ch01">
+    <div class="chapter-head">
+      <span class="chapter-num">01</span>
+      <span class="chapter-tc">00:00:04:12</span>
+    </div>
+    <h2 class="chapter-title" data-fr="Préparation" data-en="Preparation">Préparation</h2>
+    <div class="frame-wrap">
+      <div class="frame">
+        <img src="la-loge-01-preparation.jpg" alt="Mannequin aux cheveux roses boutonnant un manteau oxblood, main d'une styliste ajustant le col">
+        <span class="frame-tc-corner">A CAM · TC 04:12</span>
+        <span class="frame-label">Prompt 01</span>
+      </div>
+      <div>
+        <div class="prompt-block">Behind-the-scenes candid 35mm photograph, centered on the woman with pink-rose bob, fully clothed, finishing her look before a take — sliding her arms into the oxblood high-collar wool coat, a stylist just out of frame adjusting the collar and smoothing a wrinkle at the shoulder. Focused, calm expression, looking down slightly as she buttons the coat. Wood-paneled room, soft window light falling across her face, wardrobe rack with extra garments softly blurred in the background, tethered laptop cart barely visible at the edge of frame. Heavy 35mm film grain, warm faded tones, slight vignette, imperfect candid framing, quiet authentic preparation moment rather than a produced shot.</div>
+        <p class="caption" data-fr="Le dernier ajustement avant le plan — le geste, pas la pose." data-en="The last adjustment before the shot — the gesture, not the pose.">Le dernier ajustement avant le plan — le geste, pas la pose.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter" id="ch02">
+    <div class="chapter-head">
+      <span class="chapter-num">02</span>
+      <span class="chapter-tc">00:00:11:28</span>
+    </div>
+    <h2 class="chapter-title" data-fr="Pause" data-en="Pause">Pause</h2>
+    <div class="frame-wrap">
+      <div class="frame">
+        <img src="la-loge-02-pause.jpg" alt="Équipe riant ensemble autour d'un ordinateur portable en coulisses, chambre boisée">
+        <span class="frame-tc-corner">A CAM · TC 11:28</span>
+        <span class="frame-label">Prompt 02</span>
+      </div>
+      <div>
+        <div class="prompt-block">Behind-the-scenes candid 35mm photograph, wide shot capturing the full break moment. The woman with pink-rose bob in the oxblood high-collar coat and the man in a navy quarter-zip pullover over a white collared shirt, both mid-laugh, standing close together near the tethered laptop cart. The photographer, camera lowered, also laughing and gesturing toward the screen, sharing the joke. A stylist and an assistant visible at the edges of frame, relaxed postures, one leaning against the wardrobe rack. Wood-paneled room, soft warm window light spilling across the group, cables and light stands scattered on the floor, genuine loose energy. Heavy 35mm film grain, warm faded tones, imperfect candid framing, slight motion blur from movement, authentic joyful in-between moment rather than a produced shot.</div>
+        <p class="caption" data-fr="Le rire n'était pas prévu au script — c'est justement pour ça qu'on le garde." data-en="The laugh wasn't in the script — that's exactly why we keep it.">Le rire n'était pas prévu au script — c'est justement pour ça qu'on le garde.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter" id="ch03">
+    <div class="chapter-head">
+      <span class="chapter-num">03</span>
+      <span class="chapter-tc">00:00:15:03</span>
+    </div>
+    <h2 class="chapter-title" data-fr="Reprise" data-en="Resume">Reprise</h2>
+    <div class="frame-wrap">
+      <div class="frame">
+        <img src="la-loge-03-reprise.jpg" alt="Photographe cadrant le plan, mannequin ajustant son col, deuxième mannequin prenant sa marque">
+        <span class="frame-tc-corner">A CAM · TC 15:03</span>
+        <span class="frame-label">Prompt 03</span>
+      </div>
+      <div>
+        <div class="prompt-block">Behind-the-scenes candid 35mm photograph, the mood shifting back to focus right after the shared laugh. The woman with pink-rose bob straightening the collar of her oxblood coat, expression settling back into calm concentration, while the man in the navy quarter-zip pullover takes his mark near the wall, adjusting his posture. The photographer raising the camera again, framing the shot, stylist stepping back out of frame with a final touch to the woman's hair. Wood-paneled room, soft warm window light, cables and light stands visible in the background, energy settling from loose to focused. Heavy 35mm film grain, warm faded tones, imperfect candid framing, authentic transitional moment between a break and the next take.</div>
+        <p class="caption" data-fr="Le silence revient. L'équipe se replace sans qu'on ait besoin de le dire." data-en="The silence returns. The team resets without needing to be told.">Le silence revient. L'équipe se replace sans qu'on ait besoin de le dire.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter" id="ch04">
+    <div class="chapter-head">
+      <span class="chapter-num">04</span>
+      <span class="chapter-tc">00:00:18:40</span>
+    </div>
+    <h2 class="chapter-title" data-fr="Le Plan" data-en="The Shot">Le Plan</h2>
+    <div class="frame-wrap">
+      <div class="frame">
+        <img src="la-loge-04-le-plan.jpg" alt="Portrait final posé des deux mannequins, fond sombre texturé">
+        <span class="frame-tc-corner">A CAM · TC 18:40</span>
+        <span class="frame-label">Prompt 04 — Final</span>
+      </div>
+      <div>
+        <div class="prompt-block">Cinematic 35mm film portrait, the finished take following the making-of sequence. Both models fully composed and still, posed together against the dark textured backdrop. The woman with pink-rose bob wearing the oxblood high-collar coat, calm direct gaze toward camera, collar freshly adjusted. Beside her, the man in a navy quarter-zip pullover over a white collared shirt, small embroidered emblem visible at the chest, composed and confident stance. Single warm key light sculpting both faces, deep shadow falling into the dark charcoal-brown backdrop matching the campaign identity. Shot on Kodak Vision3 500T, natural film grain, shallow depth of field, slightly desaturated warm-cool grade, subtle analog imperfections. Composition centered, formal, chest-up framing — the polished result after the candid preparation.</div>
+        <p class="caption" data-fr="Ce que la coulisse rendait possible : la photo qu'on garde." data-en="What the backstage made possible: the photo we keep.">Ce que la coulisse rendait possible : la photo qu'on garde.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <a href="maison-editorial-final.html" class="footer-logo">Home.Sake</a>
+  <div class="socials">
+    <a href="#">Instagram</a>
+    <a href="#">Pinterest</a>
+    <a href="#">Journal</a>
+  </div>
+  <p class="copyright" data-fr="© 2026 HOME.SAKE Éditorial. Tous droits réservés." data-en="© 2026 HOME.SAKE Editorial. All rights reserved.">&copy; 2026 HOME.SAKE Éditorial. Tous droits réservés.</p>
+  <p class="credit"><a href="the-studio.html" style="color:inherit;border-bottom:1px solid currentColor;" data-fr="Direction créative & production visuelle — Stampede Production" data-en="Creative direction & visual production — Stampede Production">Direction créative & production visuelle — Stampede Production</a></p>
+</footer>
+
+<button class="back-to-top" id="back-to-top" aria-label="Remonter en haut de page">↑</button>
+
+<script>
+  const tc = document.getElementById('tc-value');
+  function formatTC(totalFrames){
+    const fps = 24;
+    const h = String(Math.floor(totalFrames/(fps*3600))).padStart(2,'0');
+    const m = String(Math.floor((totalFrames/(fps*60))%60)).padStart(2,'0');
+    const s = String(Math.floor((totalFrames/fps)%60)).padStart(2,'0');
+    const f = String(Math.floor(totalFrames%fps)).padStart(2,'0');
+    return `${h}:${m}:${s}:${f}`;
+  }
+  function updateTimecode(){
+    const scrollFraction = window.scrollY / (document.body.scrollHeight - window.innerHeight || 1);
+    const totalFrames = Math.floor(scrollFraction * 24 * 240);
+    tc.textContent = formatTC(totalFrames);
+  }
+  window.addEventListener('scroll', updateTimecode, { passive:true });
+  updateTimecode();
+
+  const chapters = document.querySelectorAll('.chapter');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.2});
+  chapters.forEach(c=>io.observe(c));
+
+  const backToTop = document.getElementById('back-to-top');
+  window.addEventListener('scroll', ()=>{
+    if(window.scrollY > window.innerHeight * 0.6){ backToTop.classList.add('is-visible'); }
+    else { backToTop.classList.remove('is-visible'); }
+  }, { passive:true });
+  backToTop.addEventListener('click', ()=>{
+    window.scrollTo({ top:0, behavior:'smooth' });
+  });
+
+  // Bascule FR / EN
+  const langButtons = document.querySelectorAll('[data-lang-btn]');
+  const translatable = document.querySelectorAll('[data-fr][data-en]');
+
+  function setLang(lang){
+    translatable.forEach(el=>{
+      el.textContent = el.dataset[lang];
+    });
+    langButtons.forEach(btn=>{
+      btn.classList.toggle('active', btn.dataset.langBtn === lang);
+    });
+    document.documentElement.lang = lang;
+  }
+
+  langButtons.forEach(btn=>{
+    btn.addEventListener('click', ()=> setLang(btn.dataset.langBtn));
+  });
+</script>
+
+</body>
+</html>
