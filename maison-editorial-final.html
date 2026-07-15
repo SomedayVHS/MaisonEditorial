@@ -348,6 +348,108 @@
     .frame-img, .frame-text{ grid-column:1/-1; order:initial !important; }
   }
 
+  /* ---------- ÉTÉ 2027 TEASER ---------- */
+  .capsule-teaser{
+    background:#F3F1EC;
+    padding:6rem 5.5rem;
+    border-top:1px solid rgba(18,17,15,0.1);
+    border-bottom:1px solid rgba(18,17,15,0.1);
+  }
+
+  .capsule-teaser .teaser-heading{
+    max-width:1500px;
+    margin:0 auto 3rem;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:1.5rem;
+  }
+
+  .capsule-teaser .kicker{
+    font-family:var(--font-mono);
+    font-size:0.75rem;
+    letter-spacing:3px;
+    color:#2B4A6B;
+    text-transform:uppercase;
+    margin-bottom:1rem;
+    display:flex;
+    align-items:center;
+    gap:0.8rem;
+  }
+  .capsule-teaser .kicker::before{ content:''; width:24px; height:1px; background:#2B4A6B; }
+
+  .capsule-teaser h2{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-weight:600;
+    font-size:clamp(1.8rem, 3.6vw, 2.6rem);
+    max-width:640px;
+  }
+
+  .capsule-teaser .teaser-link{
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:#2B4A6B;
+    border-bottom:1px solid #2B4A6B;
+    padding-bottom:3px;
+    white-space:nowrap;
+    transition:opacity 0.3s ease;
+  }
+  .capsule-teaser .teaser-link:hover{ opacity:0.7; }
+
+  .teaser-grid{
+    max-width:1500px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:2rem;
+  }
+
+  .teaser-item{ display:block; }
+
+  .teaser-item .teaser-frame{
+    position:relative;
+    overflow:hidden;
+    margin-bottom:1rem;
+  }
+  .teaser-item img{
+    width:100%; height:100%;
+    display:block;
+    object-fit:cover;
+    aspect-ratio:3/4;
+    filter:saturate(1.05) contrast(1.02);
+    transition:transform 0.6s ease, filter 0.6s ease;
+  }
+  .teaser-item:hover img{ transform:scale(1.03); filter:saturate(1.15); }
+
+  .teaser-item .teaser-code{
+    position:absolute; top:0.8rem; left:0.8rem;
+    font-family:var(--font-mono); font-size:0.62rem; letter-spacing:1px;
+    color:var(--bone); background:rgba(18,17,15,0.55); padding:0.25rem 0.55rem;
+  }
+
+  .teaser-item h3{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:1.1rem;
+    margin-bottom:0.3rem;
+    color:var(--ink);
+  }
+
+  .teaser-item p{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    color:var(--smoke);
+  }
+
+  @media (max-width:900px){
+    .capsule-teaser{ padding:4rem 1.8rem; }
+    .teaser-grid{ grid-template-columns:1fr; gap:2.2rem; }
+  }
+
   /* ---------- QUOTE ---------- */
   .quote-section{
     background:var(--ink);
@@ -529,6 +631,7 @@
         <li><a href="#editorial">Éditorial</a></li>
         <li><a href="collections.html">Collections</a></li>
         <li><a href="collections-erosion-ss27.html">Érosion SS27</a></li>
+        <li><a href="collections-ete-2027.html">Été 2027</a></li>
         <li><a href="vintage.html">Vintage</a></li>
         <li><a href="making-of.html">Making-Of</a></li>
         <li><a href="la-maison.html">La Maison</a></li>
@@ -597,6 +700,45 @@
           </div>
         </article>
 
+      </div>
+    </section>
+
+    <section class="capsule-teaser">
+      <div class="teaser-heading">
+        <div>
+          <p class="kicker">Capsule 05 — Été 2027</p>
+          <h2>Un même bleu, du matin à la nuit tombée.</h2>
+        </div>
+        <a href="collections-ete-2027.html" class="teaser-link">Voir les 10 pièces →</a>
+      </div>
+
+      <div class="teaser-grid">
+        <a href="produit-heure-bleue.html" class="teaser-item">
+          <div class="teaser-frame">
+            <span class="teaser-code">ET.01</span>
+            <img src="ete2027-01-heure-bleue.jpg" alt="Robe satin bleu électrique au coucher du soleil">
+          </div>
+          <h3>L'Heure Bleue</h3>
+          <p>Robe — 420 €</p>
+        </a>
+
+        <a href="produit-maillot-lame.html" class="teaser-item">
+          <div class="teaser-frame">
+            <span class="teaser-code">ET.04</span>
+            <img src="ete2027-04-maillot-lame.jpg" alt="Maillot une pièce bleu lamé dans les vagues">
+          </div>
+          <h3>Le Maillot Lamé</h3>
+          <p>Maillot — 220 €</p>
+        </a>
+
+        <a href="produit-kimono-fleuri.html" class="teaser-item">
+          <div class="teaser-frame">
+            <span class="teaser-code">ET.10</span>
+            <img src="ete2027-10-kimono-fleuri.jpg" alt="Kimono fleuri transparent sur maillot bleu, dans l'eau">
+          </div>
+          <h3>Le Kimono Fleuri</h3>
+          <p>Robe de plage — 290 €</p>
+        </a>
       </div>
     </section>
 
