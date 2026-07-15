@@ -621,6 +621,55 @@
     .lightbox-next{ right:0.6rem; }
   }
 
+  /* ---------- ANNOUNCE BANNER ---------- */
+  .announce-banner{
+    max-width:1500px;
+    margin:0 auto;
+    padding:0 5.5rem 3rem;
+  }
+
+  .announce-banner a{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:1.5rem;
+    padding:1.4rem 2rem;
+    border:1px solid var(--brass);
+    background:rgba(156,122,69,0.06);
+    transition:background 0.3s ease;
+  }
+
+  .announce-banner a:hover{
+    background:rgba(156,122,69,0.14);
+  }
+
+  .announce-banner .announce-text{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    letter-spacing:0.5px;
+    color:var(--ink);
+  }
+
+  .announce-banner .announce-text b{
+    color:var(--oxblood);
+    font-family:var(--font-display);
+    font-style:italic;
+    font-size:1rem;
+    margin-right:0.6rem;
+  }
+
+  .announce-banner .announce-arrow{
+    font-family:var(--font-mono);
+    font-size:0.9rem;
+    color:var(--brass);
+    flex-shrink:0;
+  }
+
+  @media (max-width:900px){
+    .announce-banner{ padding:0 1.8rem 2rem; }
+    .announce-banner a{ flex-direction:column; align-items:flex-start; gap:0.6rem; }
+  }
+
   /* ---------- FOOTER ---------- */
   footer{
     padding:5rem 5.5rem 3rem;
@@ -638,6 +687,7 @@
   }
   .socials a:hover{ color:var(--oxblood); }
   footer p{ font-family:var(--font-mono); font-size:0.68rem; color:var(--smoke); letter-spacing:0.5px; }
+  footer p.credit{ font-size:0.62rem; opacity:0.75; margin-top:0.3rem; } footer p.credit a{ color:inherit; border-bottom:1px solid currentColor; transition:color 0.3s ease; } footer p.credit a:hover{ color:var(--oxblood); }
   @media (max-width:900px){ footer{ padding:4rem 1.8rem 2.5rem; } }
 
   @media (prefers-reduced-motion: reduce){
@@ -661,6 +711,7 @@
       <ul>
         <li><a href="maison-editorial-final.html#editorial">Éditorial</a></li>
         <li><a href="collections.html" class="active">Collections</a></li>
+        <li><a href="collections-erosion-ss27.html">Érosion SS27</a></li>
         <li><a href="vintage.html">Vintage</a></li>
         <li><a href="making-of.html">Making-Of</a></li>
         <li><a href="la-maison.html">La Maison</a></li>
@@ -675,6 +726,13 @@
       <h1>Chaque pièce est une prise qu'on a gardée au montage.</h1>
       <p class="lede">Six coupes retenues sur la pellicule de cette saison — aucune n'est là pour décorer, chacune tient un plan. Survolez une image pour la faire ressortir de l'ombre.</p>
     </section>
+
+    <div class="announce-banner">
+      <a href="collections-erosion-ss27.html">
+        <span class="announce-text"><b>Nouveau</b>Érosion — la collection SS27 vient d'arriver. Six plans où la lumière mange le cadre.</span>
+        <span class="announce-arrow">→</span>
+      </a>
+    </div>
 
     <div class="video-insert">
       <div class="video-frame">
@@ -849,6 +907,7 @@
       <a href="#">Journal</a>
     </div>
     <p>&copy; 2026 HOME.SAKE Éditorial. Tous droits réservés.</p>
+    <p class="credit"><a href="the-studio.html">Direction créative & production visuelle — Stampede Production</a></p>
   </footer>
 
   <button class="back-to-top" id="back-to-top" aria-label="Remonter en haut de page">↑</button>

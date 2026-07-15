@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOME.SAKE — Érosion SS27</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="description" content="Érosion — la collection SS27 HOME.SAKE. Six plans où la lumière mange le cadre autant qu'elle le révèle.">
+<meta property="og:title" content="HOME.SAKE — Érosion SS27">
+<meta property="og:description" content="Aucun sujet n'est net à cent pour cent — une mémoire ne l'est jamais non plus.">
+<meta property="og:image" content="hero.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #12110F;
+    --bone: #EFE9DF;
+    --brass: #9C7A45;
+    --oxblood: #6B2E2A;
+    --terracotta: #B5652E;
+    --saphir: #2B3A55;
+    --silver-nitrate: #C7C2B8;
+    --font-display:'Bodoni Moda', serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'Space Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html{ scroll-behavior:smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--bone);
+    font-family: var(--font-body);
+    font-weight:300;
+    overflow-x: hidden;
+  }
+
+  a{ text-decoration:none; color:inherit; }
+  ::selection{ background:var(--brass); color:var(--ink); }
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--brass); outline-offset:3px; }
+
+  /* ---------- SITE HEADER ---------- */
+  header.site-header{
+    padding:2.2rem 4rem 2.2rem 5.5rem;
+    display:flex; justify-content:space-between; align-items:center;
+    position:relative; z-index:20;
+  }
+  .logo{ font-family:var(--font-display); font-style:italic; font-size:1.6rem; letter-spacing:1px; color:var(--bone); }
+  .logo small{ display:block; font-family:var(--font-mono); font-style:normal; font-size:0.6rem; letter-spacing:4px; opacity:0.55; margin-top:2px; }
+  nav ul{ list-style:none; display:flex; gap:2rem; flex-wrap:wrap; justify-content:flex-end; }
+  nav a{
+    font-family:var(--font-mono); font-size:0.7rem; letter-spacing:1.5px;
+    text-transform:uppercase; position:relative; padding-bottom:4px; color:var(--bone);
+  }
+  nav a.active{ color:var(--brass); }
+  nav a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background:currentColor; transition:width 0.35s ease;
+  }
+  nav a:hover::after, nav a.active::after{ width:100%; }
+
+  @media (max-width:900px){
+    header.site-header{ flex-direction:column; gap:1.2rem; padding:1.8rem 1.5rem; }
+    nav ul{ gap:1.1rem; justify-content:center; }
+  }
+
+  /* ---------- TIMECODE RAIL ---------- */
+  .timecode-rail{
+    position:fixed; left:1.4rem; top:0; height:100vh;
+    display:flex; align-items:center; z-index:50; pointer-events:none;
+  }
+  .timecode-rail span{
+    font-family:var(--font-mono); font-size:0.7rem; letter-spacing:2px;
+    color:var(--bone); opacity:0.5; writing-mode:vertical-rl;
+    transform:rotate(180deg); display:flex; align-items:center; gap:0.6rem;
+  }
+  .timecode-rail .dot{ width:5px; height:5px; border-radius:50%; background:var(--brass); writing-mode:horizontal-tb; }
+  @media (max-width:900px){ .timecode-rail{ display:none; } }
+
+  #reel-erosion {
+    position: relative;
+    padding: 4rem 6vw 8rem;
+    min-height: 100vh;
+  }
+
+  /* Grain overlay — texture argentique */
+  #reel-erosion::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 2;
+    mix-blend-mode: overlay;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--brass);
+    display: block;
+    margin-bottom: 1.5rem;
+  }
+
+  h1.title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 600;
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: 0.95;
+    max-width: 14ch;
+    position: relative;
+  }
+
+  /* Le halo d'érosion — bord droit du titre mangé par la lumière */
+  h1.title::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -10%;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, var(--silver-nitrate) 90%);
+    filter: blur(24px);
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  .intro {
+    max-width: 42ch;
+    margin-top: 2.5rem;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--silver-nitrate);
+  }
+
+  .timecode {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--brass);
+    margin-top: 3rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* Grille des plans */
+  .plates {
+    margin-top: 6rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2px;
+    background: var(--brass);
+  }
+
+  .plate {
+    position: relative;
+    background:
+      linear-gradient(100deg, #2a2620 30%, #3a352c 50%, #2a2620 70%);
+    background-size:200% 100%;
+    animation:shimmer 1.6s infinite linear;
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    cursor: zoom-in;
+  }
+
+  .plate.img-ready{ animation:none; background:var(--ink); }
+
+  @keyframes shimmer{
+    0%{ background-position:200% 0; }
+    100%{ background-position:-200% 0; }
+  }
+
+  .plate img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(0.15) contrast(1.05);
+    opacity:0;
+    transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), filter 1.4s ease, opacity 0.5s ease;
+  }
+
+  .plate img.is-loaded{ opacity:1; }
+
+  .plate:hover img {
+    transform: scale(1.04);
+    filter: sepia(0.05) contrast(1.1);
+  }
+
+  /* Zone d'érosion — un coin de chaque plan est "mangé" par la lumière */
+  .plate::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--erosion-x, 85%) var(--erosion-y, 10%),
+                var(--silver-nitrate) 0%, transparent 35%);
+    opacity: 0.5;
+    mix-blend-mode: screen;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .plate:nth-child(2)::after { --erosion-x: 10%; --erosion-y: 90%; }
+  .plate:nth-child(3)::after { --erosion-x: 90%; --erosion-y: 85%; }
+  .plate:nth-child(4)::after { --erosion-x: 15%; --erosion-y: 15%; }
+  .plate:nth-child(5)::after { --erosion-x: 80%; --erosion-y: 50%; }
+  .plate:nth-child(6)::after { --erosion-x: 50%; --erosion-y: 10%; }
+
+  .plate-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.2rem;
+    background: linear-gradient(to top, rgba(18,17,15,0.9), transparent);
+    z-index: 2;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+    color: var(--bone);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .plate:hover .plate-caption {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .plate-index {
+    color: var(--terracotta);
+    margin-right: 0.5rem;
+  }
+
+  .footer-note {
+    margin-top: 5rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--brass);
+    max-width: 40ch;
+  }
+
+  /* ---------- LIGHTBOX ---------- */
+  .lightbox{
+    position:fixed; inset:0;
+    background:rgba(18,17,15,0.96);
+    z-index:200;
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; pointer-events:none;
+    transition:opacity 0.3s ease;
+  }
+  .lightbox.is-open{ opacity:1; pointer-events:auto; }
+  .lightbox img{
+    max-width:min(85vw, 900px);
+    max-height:85vh;
+    object-fit:contain;
+    box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  }
+  .lightbox-caption{
+    position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%);
+    text-align:center; color:var(--bone);
+    font-family:var(--font-mono); font-size:0.8rem; letter-spacing:0.1em;
+  }
+  .lightbox-close, .lightbox-prev, .lightbox-next{
+    position:absolute;
+    background:none; border:1px solid var(--bone); color:var(--bone);
+    cursor:pointer; font-family:var(--font-mono);
+    display:flex; align-items:center; justify-content:center;
+    transition:background 0.3s ease, color 0.3s ease;
+  }
+  .lightbox-close{ top:1.8rem; right:1.8rem; width:42px; height:42px; font-size:1rem; }
+  .lightbox-prev, .lightbox-next{ top:50%; transform:translateY(-50%); width:46px; height:46px; font-size:1.2rem; }
+  .lightbox-prev{ left:1.8rem; }
+  .lightbox-next{ right:1.8rem; }
+  .lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover{ background:var(--bone); color:var(--ink); }
+
+  @media (max-width:900px){
+    .lightbox img{ max-width:92vw; }
+    .lightbox-prev, .lightbox-next{ width:38px; height:38px; }
+    .lightbox-close{ width:38px; height:38px; top:1.2rem; right:1.2rem; }
+    .lightbox-prev{ left:0.6rem; }
+    .lightbox-next{ right:0.6rem; }
+  }
+
+  /* ---------- TRIPTYQUE PROMO ---------- */
+  #triptych-erosion{
+    padding: 6rem 6vw 4rem;
+    position: relative;
+    border-top: 1px solid rgba(239,233,223,0.12);
+  }
+
+  #triptych-erosion h2.triptych-title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 600;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    line-height: 0.98;
+    margin-bottom: 2.5rem;
+  }
+
+  .triptych {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--brass);
+    aspect-ratio: 2.39/1;
+    width: 100%;
+    position: relative;
+  }
+
+  .panel {
+    position: relative;
+    background: var(--ink);
+    overflow: hidden;
+  }
+
+  .panel video,
+  .panel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(0.15) contrast(1.05);
+  }
+
+  /* Halo d'érosion propre à chaque panneau, désynchronisé */
+  .panel::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--erosion-x) var(--erosion-y),
+                var(--silver-nitrate) 0%, transparent 40%);
+    opacity: var(--erosion-opacity, 0.3);
+    mix-blend-mode: screen;
+    pointer-events: none;
+    animation: breathe var(--erosion-duration, 15s) ease-in-out infinite;
+  }
+
+  .panel-1::after { --erosion-x: 90%; --erosion-y: 10%; --erosion-duration: 15s; }
+  .panel-2::after { --erosion-x: 50%; --erosion-y: 90%; --erosion-duration: 18s; animation-delay: 2s; }
+  .panel-3::after { --erosion-x: 50%; --erosion-y: 30%; --erosion-duration: 12s; animation-delay: 5s; }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.55; }
+  }
+
+  /* Fenêtre : érosion progressive et non-cyclique, distincte des deux autres */
+  .panel-3::after {
+    animation: erode-total 15s ease-in forwards;
+  }
+  @keyframes erode-total {
+    0%   { opacity: 0.15; }
+    100% { opacity: 0.85; }
+  }
+
+  .panel-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    background: linear-gradient(to top, rgba(18,17,15,0.85), transparent);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    color: var(--bone);
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .panel-label .idx { color: var(--terracotta); }
+
+  /* Silence sonore, indiqué visuellement */
+  .sound-note {
+    margin-top: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: var(--brass);
+  }
+
+  .triptych-timecode {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--silver-nitrate);
+    margin-top: 0.4rem;
+  }
+
+  @media (max-width: 900px) {
+    .triptych {
+      grid-template-columns: 1fr;
+      aspect-ratio: auto;
+    }
+    .panel { aspect-ratio: 2.39/1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .panel::after { animation: none; opacity: 0.3; }
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer.site-footer{
+    padding:4rem 5.5rem 3rem;
+    display:flex; flex-direction:column; align-items:center; gap:1.4rem;
+    border-top:1px solid rgba(239,233,223,0.14);
+    position:relative; z-index:5;
+  }
+  .footer-logo{ font-family:var(--font-display); font-style:italic; font-size:1.4rem; color:var(--bone); transition:color 0.3s ease; }
+  .footer-logo:hover{ color:var(--brass); }
+  .socials{ display:flex; gap:2rem; }
+  .socials a{
+    font-family:var(--font-mono); font-size:0.72rem; letter-spacing:1.5px;
+    text-transform:uppercase; color:rgba(239,233,223,0.55); transition:color 0.3s ease;
+  }
+  .socials a:hover{ color:var(--brass); }
+  footer.site-footer p.copyright{ font-family:var(--font-mono); font-size:0.68rem; color:rgba(239,233,223,0.5); letter-spacing:0.5px; }
+  footer.site-footer p.credit{
+    font-family:var(--font-mono); font-size:0.62rem; color:rgba(239,233,223,0.4);
+    letter-spacing:0.5px; margin-top:0.4rem;
+  }
+  @media (max-width:900px){ footer.site-footer{ padding:3rem 1.8rem 2.5rem; } }
+
+  /* ---------- BACK TO TOP ---------- */
+  .back-to-top{
+    position:fixed; bottom:1.8rem; right:1.8rem;
+    width:42px; height:42px;
+    border:1px solid var(--bone); background:var(--ink); color:var(--bone);
+    font-family:var(--font-mono); font-size:0.85rem;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; opacity:0; pointer-events:none; transform:translateY(8px);
+    transition:opacity 0.35s ease, transform 0.35s ease, background 0.3s ease, color 0.3s ease;
+    z-index:60;
+  }
+  .back-to-top.is-visible{ opacity:0.85; pointer-events:auto; transform:translateY(0); }
+  .back-to-top:hover{ opacity:1; background:var(--bone); color:var(--ink); }
+  @media (max-width:900px){ .back-to-top{ bottom:1.2rem; right:1.2rem; width:38px; height:38px; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .plate img, .plate-caption { transition: none; }
+    .plate { animation:none; background:var(--ink); }
+  }
+</style>
+</head>
+<body>
+
+<div class="timecode-rail">
+  <span><span class="dot"></span><span id="tc-value">00:00:00:12</span></span>
+</div>
+
+<header class="site-header">
+  <a href="maison-editorial-final.html" class="logo">Home.Sake<small>Éditorial — Paris</small></a>
+  <nav>
+    <ul>
+      <li><a href="maison-editorial-final.html#editorial">Éditorial</a></li>
+      <li><a href="collections.html">Collections</a></li>
+      <li><a href="collections-erosion-ss27.html" class="active">Érosion SS27</a></li>
+      <li><a href="vintage.html">Vintage</a></li>
+      <li><a href="making-of.html">Making-Of</a></li>
+      <li><a href="la-maison.html">La Maison</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section id="reel-erosion">
+  <span class="eyebrow">Home.Sake — Collection SS27</span>
+  <h1 class="title">Érosion</h1>
+  <p class="intro">
+    Six plans où la lumière mange le cadre autant qu'elle le révèle.
+    Aucun sujet n'est net à cent pour cent — une mémoire ne l'est jamais non plus.
+  </p>
+  <div class="timecode">00:00:00:00 — 00:04:12:00 / KODAK VISION3 / ANALOG IMPERFECTION IS INTENTIONAL</div>
+
+  <div class="plates" id="plates-grid">
+    <div class="plate" data-plate>
+      <img src="erosion-01.jpg" alt="Silhouette terracotta, cour ensoleillée">
+      <div class="plate-caption"><span class="plate-index">01</span>Cour de pierre — 250D</div>
+    </div>
+    <div class="plate" data-plate>
+      <img src="erosion-02.jpg" alt="Détail texture bouclette">
+      <div class="plate-caption"><span class="plate-index">02</span>Bouclette, brass — 500T</div>
+    </div>
+    <div class="plate" data-plate>
+      <img src="erosion-03.jpg" alt="Silhouette oxblood, loft industriel">
+      <div class="plate-caption"><span class="plate-index">03</span>Loft — départ de plan</div>
+    </div>
+    <div class="plate" data-plate>
+      <img src="erosion-04.jpg" alt="Figure assise, saphir">
+      <div class="plate-caption"><span class="plate-index">04</span>Intérieur — saphir</div>
+    </div>
+    <div class="plate" data-plate>
+      <img src="erosion-05.jpg" alt="Détail extérieur, mur de pierre">
+      <div class="plate-caption"><span class="plate-index">05</span>Mur, texture lisible</div>
+    </div>
+    <div class="plate" data-plate>
+      <img src="erosion-06.jpg" alt="Plan large, fenêtre surexposée">
+      <div class="plate-caption"><span class="plate-index">06</span>Fenêtre — érosion totale</div>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    La couleur ne dit rien seule ; c'est la lumière qui décide<br>ce qui reste net.
+  </div>
+</section>
+
+<section id="triptych-erosion">
+  <span class="eyebrow">Home.Sake — Encart promo SS27</span>
+  <h2 class="triptych-title">Érosion — Triptyque</h2>
+
+  <div class="triptych">
+    <div class="panel panel-1">
+      <video data-delay="0" muted loop playsinline poster="erosion-triptych-01-cour.jpg">
+        <source src="erosion-triptych-01-cour.mp4" type="video/mp4">
+      </video>
+      <div class="panel-label"><span class="idx">01</span><span>Cour — érosion latérale</span></div>
+    </div>
+    <div class="panel panel-2">
+      <video data-delay="2200" muted loop playsinline poster="erosion-triptych-02-bouclette.jpg">
+        <source src="erosion-triptych-02-bouclette.mp4" type="video/mp4">
+      </video>
+      <div class="panel-label"><span class="idx">02</span><span>Bouclette — respiration</span></div>
+    </div>
+    <div class="panel panel-3">
+      <video data-delay="4700" muted loop playsinline poster="erosion-triptych-03-fenetre.jpg">
+        <source src="erosion-triptych-03-fenetre.mp4" type="video/mp4">
+      </video>
+      <div class="panel-label"><span class="idx">03</span><span>Fenêtre — dissolution</span></div>
+    </div>
+  </div>
+
+  <div class="sound-note">Silence — grain sonore ambiant continu, aucune musique par panneau</div>
+  <div class="triptych-timecode">00:00:00:00 → 00:00:15:00 / lecture décalée entre colonnes (0s / 2.2s / 4.7s)</div>
+</section>
+
+<footer class="site-footer">
+  <a href="maison-editorial-final.html" class="footer-logo">Home.Sake</a>
+  <div class="socials">
+    <a href="#">Instagram</a>
+    <a href="#">Pinterest</a>
+    <a href="#">Journal</a>
+  </div>
+  <p class="copyright">&copy; 2027 HOME.SAKE Éditorial. Tous droits réservés.</p>
+  <p class="credit"><a href="the-studio.html" style="color:inherit;border-bottom:1px solid currentColor;">Direction créative & production visuelle — Stampede Production</a></p>
+</footer>
+
+<button class="back-to-top" id="back-to-top" aria-label="Remonter en haut de page">↑</button>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightbox-close" aria-label="Fermer">✕</button>
+  <button class="lightbox-prev" id="lightbox-prev" aria-label="Plan précédent">←</button>
+  <img id="lightbox-img" src="" alt="">
+  <p class="lightbox-caption" id="lightbox-caption"></p>
+  <button class="lightbox-next" id="lightbox-next" aria-label="Plan suivant">→</button>
+</div>
+
+<script>
+  const tc = document.getElementById('tc-value');
+  function formatTC(totalFrames){
+    const fps = 24;
+    const h = String(Math.floor(totalFrames/(fps*3600))).padStart(2,'0');
+    const m = String(Math.floor((totalFrames/(fps*60))%60)).padStart(2,'0');
+    const s = String(Math.floor((totalFrames/fps)%60)).padStart(2,'0');
+    const f = String(Math.floor(totalFrames%fps)).padStart(2,'0');
+    return `${h}:${m}:${s}:${f}`;
+  }
+  function updateTimecode(){
+    const scrollFraction = window.scrollY / (document.body.scrollHeight - window.innerHeight || 1);
+    const totalFrames = Math.floor(scrollFraction * 24 * 240);
+    tc.textContent = formatTC(totalFrames);
+  }
+  window.addEventListener('scroll', updateTimecode, { passive:true });
+  updateTimecode();
+
+  // Skeleton loading
+  document.querySelectorAll('.plate img').forEach(img=>{
+    const plate = img.closest('.plate');
+    function markLoaded(){
+      img.classList.add('is-loaded');
+      plate.classList.add('img-ready');
+    }
+    if(img.complete && img.naturalWidth > 0){ markLoaded(); }
+    else {
+      img.addEventListener('load', markLoaded);
+      img.addEventListener('error', markLoaded);
+    }
+  });
+
+  // Back to top
+  const backToTop = document.getElementById('back-to-top');
+  window.addEventListener('scroll', ()=>{
+    if(window.scrollY > window.innerHeight * 0.6){ backToTop.classList.add('is-visible'); }
+    else { backToTop.classList.remove('is-visible'); }
+  }, { passive:true });
+  backToTop.addEventListener('click', ()=>{
+    window.scrollTo({ top:0, behavior:'smooth' });
+  });
+
+  // Lightbox
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const lightboxPrev = document.getElementById('lightbox-prev');
+  const lightboxNext = document.getElementById('lightbox-next');
+
+  const allPlates = Array.from(document.querySelectorAll('.plate'));
+  const gallery = allPlates.map(el=>{
+    const img = el.querySelector('img');
+    const caption = el.querySelector('.plate-caption');
+    return { src: img?.getAttribute('src'), alt: img?.getAttribute('alt'), title: caption?.textContent };
+  }).filter(item=>item.src);
+
+  let currentIndex = 0;
+
+  function openLightbox(index){
+    currentIndex = index;
+    const item = gallery[currentIndex];
+    lightboxImg.src = item.src;
+    lightboxImg.alt = item.alt || '';
+    lightboxCaption.textContent = item.title || '';
+    lightbox.classList.add('is-open');
+  }
+  function closeLightbox(){ lightbox.classList.remove('is-open'); }
+  function showRelative(delta){
+    currentIndex = (currentIndex + delta + gallery.length) % gallery.length;
+    openLightbox(currentIndex);
+  }
+
+  allPlates.forEach((el, index)=>{
+    el.addEventListener('click', ()=>openLightbox(index));
+  });
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxPrev.addEventListener('click', ()=>showRelative(-1));
+  lightboxNext.addEventListener('click', ()=>showRelative(1));
+  lightbox.addEventListener('click', (e)=>{ if(e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', (e)=>{
+    if(!lightbox.classList.contains('is-open')) return;
+    if(e.key === 'Escape') closeLightbox();
+    if(e.key === 'ArrowLeft') showRelative(-1);
+    if(e.key === 'ArrowRight') showRelative(1);
+  });
+
+  // Triptyque — démarrage décalé de chaque vidéo, pas de synchro sur le timecode global.
+  // Chaque clip joue en boucle indépendante une fois lancé ; le décalage
+  // n'est appliqué qu'au chargement initial de la page.
+  document.querySelectorAll('#triptych-erosion video').forEach(video => {
+    const delay = parseInt(video.dataset.delay || '0', 10);
+    video.pause();
+    video.currentTime = 0;
+    setTimeout(() => {
+      video.play().catch(() => {
+        // Certains navigateurs bloquent l'autoplay sans interaction ;
+        // le poster reste visible jusqu'au premier tap/clic sur la page.
+      });
+    }, delay);
+  });
+
+  // Filet de sécurité : si l'autoplay est bloqué, démarre tout au premier
+  // clic n'importe où sur la section, en respectant les mêmes décalages
+  // relatifs entre colonnes.
+  document.getElementById('triptych-erosion').addEventListener('click', () => {
+    document.querySelectorAll('#triptych-erosion video').forEach(video => {
+      if (video.paused) {
+        const delay = parseInt(video.dataset.delay || '0', 10);
+        setTimeout(() => video.play().catch(() => {}), delay);
+      }
+    });
+  }, { once: true });
+</script>
+
+</body>
+</html>
