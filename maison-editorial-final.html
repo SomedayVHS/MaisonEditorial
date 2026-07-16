@@ -450,6 +450,64 @@
     .teaser-grid{ grid-template-columns:1fr; gap:2.2rem; }
   }
 
+  /* ---------- COULEURS CLÉS BANNER ---------- */
+  .color-banner{
+    max-width:1500px;
+    margin:0 auto;
+    padding:0 5.5rem 3rem;
+  }
+
+  .color-banner a{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:1.5rem;
+    padding:1.4rem 2rem;
+    border:1px solid rgba(18,17,15,0.15);
+    transition:border-color 0.3s ease;
+  }
+
+  .color-banner a:hover{ border-color:var(--ink); }
+
+  .color-banner .chip-row{
+    display:flex;
+    flex-shrink:0;
+  }
+
+  .color-banner .chip{
+    width:22px; height:22px;
+    border-radius:50%;
+    margin-left:-6px;
+    border:2px solid var(--bone);
+  }
+  .color-banner .chip:first-child{ margin-left:0; }
+
+  .color-banner .banner-text{
+    font-family:var(--font-mono);
+    font-size:0.78rem;
+    letter-spacing:0.5px;
+    color:var(--ink);
+    flex:1;
+  }
+  .color-banner .banner-text b{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-size:1rem;
+    margin-right:0.6rem;
+  }
+
+  .color-banner .banner-arrow{
+    font-family:var(--font-mono);
+    font-size:0.9rem;
+    color:var(--ink);
+    flex-shrink:0;
+  }
+
+  @media (max-width:900px){
+    .color-banner{ padding:0 1.8rem 2rem; }
+    .color-banner a{ flex-direction:column; align-items:flex-start; gap:1rem; }
+  }
+
   /* ---------- QUOTE ---------- */
   .quote-section{
     background:var(--ink);
@@ -633,6 +691,7 @@
         <li><a href="collections.html">Collections</a></li>
         <li><a href="collections-erosion-ss27.html">Érosion SS27</a></li>
         <li><a href="collections-ete-2027.html">Été 2027</a></li>
+        <li><a href="couleur-cle-pe27.html">Couleurs Clés PE27</a></li>
         <li><a href="vintage.html">Vintage</a></li>
         <li><a href="making-of.html">Making-Of</a></li>
         <li><a href="la-maison.html">La Maison</a></li>
@@ -742,6 +801,20 @@
         </a>
       </div>
     </section>
+
+    <div class="color-banner">
+      <a href="couleur-cle-pe27.html">
+        <div class="chip-row">
+          <span class="chip" style="background:#1D5FD1;"></span>
+          <span class="chip" style="background:#E8447A;"></span>
+          <span class="chip" style="background:#B5652E;"></span>
+          <span class="chip" style="background:#F0611E;"></span>
+          <span class="chip" style="background:#3F7A4E;"></span>
+        </div>
+        <span class="banner-text"><b>Couleurs Clés PE27</b>Luminous Blue, Pop Pink, Clay, Energy Orange, Meadowland Green — les cinq nuances de la saison.</span>
+        <span class="banner-arrow">→</span>
+      </a>
+    </div>
 
     <section class="quote-section" id="maison">
       <p class="quote-mark">"</p>
