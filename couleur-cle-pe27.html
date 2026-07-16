@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOME.SAKE — Couleurs Clés PE27</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="description" content="Couleurs Clés Printemps/Été 2027 — Luminous Blue, Pop Pink, Clay, Energy Orange, Meadowland Green. Cinq nuances qui traversent la saison HOME.SAKE.">
+<meta property="og:title" content="HOME.SAKE — Couleurs Clés PE27">
+<meta property="og:description" content="Cinq couleurs, une seule saison — Luminous Blue, Pop Pink, Clay, Energy Orange, Meadowland Green.">
+<meta property="og:image" content="ete2027-01-heure-bleue.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  :root{
+    --ink:#12110F;
+    --bone:#EFE9DF;
+    --brass:#9C7A45;
+    --oxblood:#6B2E2A;
+    --luminous-blue:#1D5FD1;
+    --pop-pink:#E8447A;
+    --clay:#B5652E;
+    --energy-orange:#F0611E;
+    --meadowland-green:#3F7A4E;
+    --smoke:#6E6A62;
+    --font-display:'Bodoni Moda', serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'Space Mono', monospace;
+  }
+
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--bone);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-weight:300;
+    line-height:1.65;
+    overflow-x:hidden;
+  }
+  a{ text-decoration:none; color:inherit; }
+  ::selection{ background:var(--luminous-blue); color:var(--bone); }
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--luminous-blue); outline-offset:3px; }
+
+  .grain{
+    position:fixed; inset:0; pointer-events:none; z-index:999;
+    opacity:0.05; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  .timecode-rail{
+    position:fixed; left:1.4rem; top:0; height:100vh;
+    display:flex; align-items:center; z-index:50; pointer-events:none;
+  }
+  .timecode-rail span{
+    font-family:var(--font-mono); font-size:0.7rem; letter-spacing:2px;
+    color:var(--ink); opacity:0.55; writing-mode:vertical-rl;
+    transform:rotate(180deg); display:flex; align-items:center; gap:0.6rem;
+  }
+  .timecode-rail .dot{ width:5px; height:5px; border-radius:50%; background:var(--luminous-blue); writing-mode:horizontal-tb; }
+  @media (max-width:900px){ .timecode-rail{ display:none; } }
+
+  header{
+    padding:2.2rem 4rem 2.2rem 5.5rem;
+    display:flex; justify-content:space-between; align-items:center;
+    color:var(--ink);
+    position:relative; z-index:20;
+  }
+  .logo{ font-family:var(--font-display); font-style:italic; font-size:1.6rem; letter-spacing:1px; }
+  .logo small{ display:block; font-family:var(--font-mono); font-style:normal; font-size:0.6rem; letter-spacing:4px; opacity:0.55; margin-top:2px; }
+  nav ul{ list-style:none; display:flex; gap:1.7rem; flex-wrap:wrap; justify-content:flex-end; }
+  nav a{
+    font-family:var(--font-mono); font-size:0.66rem; letter-spacing:1.5px;
+    text-transform:uppercase; position:relative; padding-bottom:4px;
+  }
+  nav a.active{ color:var(--luminous-blue); }
+  nav a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background:currentColor; transition:width 0.35s ease;
+  }
+  nav a:hover::after, nav a.active::after{ width:100%; }
+
+  @media (max-width:900px){
+    header{ flex-direction:column; gap:1.2rem; padding:1.8rem 1.5rem; }
+    nav ul{ gap:1rem; justify-content:center; }
+  }
+
+  /* ---------- HERO COULEUR ---------- */
+  .color-hero{
+    background:linear-gradient(115deg,
+      var(--luminous-blue) 0%, var(--luminous-blue) 22%,
+      var(--pop-pink) 22%, var(--pop-pink) 42%,
+      var(--clay) 42%, var(--clay) 60%,
+      var(--energy-orange) 60%, var(--energy-orange) 80%,
+      var(--meadowland-green) 80%, var(--meadowland-green) 100%);
+    color:var(--bone);
+    padding:6rem 5.5rem 5rem;
+    position:relative;
+    overflow:hidden;
+  }
+  .color-hero::after{
+    content:'';
+    position:absolute; inset:0;
+    background:rgba(18,17,15,0.32);
+    pointer-events:none;
+  }
+
+  .color-hero .kicker{
+    font-family:var(--font-mono);
+    font-size:0.75rem;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:rgba(239,233,223,0.85);
+    margin-bottom:1.4rem;
+    display:flex;
+    align-items:center;
+    gap:0.8rem;
+    position:relative;
+  }
+  .color-hero .kicker::before{ content:''; width:24px; height:1px; background:var(--bone); }
+
+  .color-hero h1{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-weight:700;
+    font-size:clamp(2.6rem, 7vw, 5.6rem);
+    line-height:0.98;
+    position:relative;
+    max-width:16ch;
+  }
+
+  .color-hero .hex{
+    font-family:var(--font-mono);
+    font-size:0.85rem;
+    letter-spacing:2px;
+    color:rgba(239,233,223,0.75);
+    margin-top:1rem;
+    position:relative;
+  }
+
+  .color-hero p.lede{
+    margin-top:2rem;
+    max-width:560px;
+    font-size:1.05rem;
+    color:rgba(239,233,223,0.92);
+    position:relative;
+  }
+
+  @media (max-width:900px){ .color-hero{ padding:4rem 1.8rem 3rem; } }
+
+  /* ---------- SWATCHES ---------- */
+  .swatch-row{
+    display:flex;
+    max-width:1500px;
+    margin:0 auto;
+    border-bottom:1px solid rgba(18,17,15,0.12);
+  }
+  .swatch{
+    flex:1;
+    height:110px;
+    position:relative;
+  }
+  .swatch span{
+    position:absolute; bottom:0.6rem; left:0.8rem;
+    font-family:var(--font-mono);
+    font-size:0.62rem;
+    letter-spacing:1px;
+  }
+  @media (max-width:900px){
+    .swatch-row{ flex-wrap:wrap; }
+    .swatch{ flex:1 1 50%; height:80px; }
+  }
+
+  /* ---------- MANIFESTO ---------- */
+  .manifesto{
+    max-width:900px;
+    margin:0 auto;
+    padding:5rem 5.5rem;
+  }
+  .manifesto p{
+    font-size:1.05rem;
+    color:var(--ink);
+    margin-bottom:1.6rem;
+    max-width:680px;
+  }
+  .manifesto p.emphasis{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-size:1.4rem;
+    color:var(--luminous-blue);
+    max-width:620px;
+    margin:2rem 0;
+    line-height:1.4;
+  }
+  @media (max-width:900px){ .manifesto{ padding:3rem 1.8rem; } }
+
+  /* ---------- GALLERY ---------- */
+  .gallery-heading{
+    max-width:1500px;
+    margin:0 auto;
+    padding:1rem 5.5rem 2.5rem;
+  }
+  .gallery-heading .kicker{
+    font-family:var(--font-mono);
+    font-size:0.72rem;
+    letter-spacing:2px;
+    color:var(--luminous-blue);
+    text-transform:uppercase;
+    margin-bottom:0.8rem;
+  }
+  .gallery-heading h2{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-weight:400;
+    font-size:clamp(1.6rem, 3vw, 2.3rem);
+    max-width:640px;
+  }
+  @media (max-width:900px){ .gallery-heading{ padding:1rem 1.8rem 2rem; } }
+
+  .color-gallery{
+    max-width:1500px;
+    margin:0 auto;
+    padding:0 5.5rem 6rem;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:2.2rem;
+  }
+
+  .color-item{ opacity:0; transform:translateY(28px); transition:opacity 0.8s ease, transform 0.8s ease; }
+  .color-item.is-visible{ opacity:1; transform:translateY(0); }
+
+  .color-frame{
+    position:relative; overflow:hidden; cursor:zoom-in;
+    background:linear-gradient(100deg, #c9d2da 30%, #dbe2e7 50%, #c9d2da 70%);
+    background-size:200% 100%;
+    animation:shimmer 1.6s infinite linear;
+    margin-bottom:0.9rem;
+  }
+  .color-frame.img-ready{ animation:none; background:none; }
+  @keyframes shimmer{ 0%{ background-position:200% 0; } 100%{ background-position:-200% 0; } }
+
+  .color-frame img{
+    width:100%; height:100%; display:block; object-fit:cover;
+    aspect-ratio:3/4;
+    opacity:0;
+    transition:opacity 0.5s ease, transform 0.6s ease;
+  }
+  .color-frame img.is-loaded{ opacity:1; }
+  .color-frame:hover img{ transform:scale(1.03); }
+
+  .color-item .item-cat{
+    font-family:var(--font-mono); font-size:0.66rem; letter-spacing:1.5px;
+    text-transform:uppercase; color:var(--smoke); margin-bottom:0.3rem;
+  }
+  .color-item h3{
+    font-family:var(--font-display); font-weight:600; font-size:1.1rem; color:var(--ink);
+  }
+
+  @media (max-width:1150px){ .color-gallery{ grid-template-columns:repeat(2, 1fr); } }
+  @media (max-width:900px){ .color-gallery{ grid-template-columns:1fr; padding:0 1.8rem 4rem; } }
+
+  /* ---------- CTA ---------- */
+  .cta-strip{
+    background:var(--ink); color:var(--bone); text-align:center; padding:6rem 2rem;
+  }
+  .cta-strip h3{
+    font-family:var(--font-display); font-style:italic; font-weight:400;
+    font-size:clamp(1.4rem, 2.8vw, 2.1rem); max-width:700px; margin:0 auto 2.4rem; line-height:1.4;
+  }
+  .cta-links{ display:flex; gap:1.2rem; justify-content:center; flex-wrap:wrap; }
+  .cta-links a{
+    font-family:var(--font-mono); font-size:0.72rem; letter-spacing:1.5px; text-transform:uppercase;
+    padding:1rem 2rem; border:1px solid var(--bone);
+    transition:background 0.3s ease, color 0.3s ease;
+  }
+  .cta-links a:hover{ background:var(--bone); color:var(--ink); }
+
+  /* ---------- LIGHTBOX ---------- */
+  .lightbox{
+    position:fixed; inset:0; background:rgba(18,17,15,0.94); z-index:200;
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; pointer-events:none; transition:opacity 0.3s ease;
+  }
+  .lightbox.is-open{ opacity:1; pointer-events:auto; }
+  .lightbox img{ max-width:min(85vw, 900px); max-height:85vh; object-fit:contain; box-shadow:0 20px 60px rgba(0,0,0,0.5); }
+  .lightbox-caption{
+    position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%);
+    text-align:center; color:var(--bone); font-family:var(--font-display); font-style:italic; font-size:1.1rem;
+  }
+  .lightbox-close, .lightbox-prev, .lightbox-next{
+    position:absolute; background:none; border:1px solid var(--bone); color:var(--bone);
+    cursor:pointer; font-family:var(--font-mono);
+    display:flex; align-items:center; justify-content:center;
+    transition:background 0.3s ease, color 0.3s ease;
+  }
+  .lightbox-close{ top:1.8rem; right:1.8rem; width:42px; height:42px; font-size:1rem; }
+  .lightbox-prev, .lightbox-next{ top:50%; transform:translateY(-50%); width:46px; height:46px; font-size:1.2rem; }
+  .lightbox-prev{ left:1.8rem; } .lightbox-next{ right:1.8rem; }
+  .lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover{ background:var(--bone); color:var(--ink); }
+  @media (max-width:900px){
+    .lightbox img{ max-width:92vw; }
+    .lightbox-prev, .lightbox-next{ width:38px; height:38px; }
+    .lightbox-close{ width:38px; height:38px; top:1.2rem; right:1.2rem; }
+    .lightbox-prev{ left:0.6rem; } .lightbox-next{ right:0.6rem; }
+  }
+
+  /* ---------- VIDEO INSERT ---------- */
+  .video-insert{
+    max-width:1500px;
+    margin:0 auto;
+    padding:0 5.5rem 5rem;
+  }
+
+  .video-insert .video-border{
+    padding:3px;
+    background:linear-gradient(115deg,
+      var(--luminous-blue) 0%, var(--luminous-blue) 22%,
+      var(--pop-pink) 22%, var(--pop-pink) 42%,
+      var(--clay) 42%, var(--clay) 60%,
+      var(--energy-orange) 60%, var(--energy-orange) 80%,
+      var(--meadowland-green) 80%, var(--meadowland-green) 100%);
+  }
+
+  .video-insert .video-frame{
+    position:relative;
+    aspect-ratio:16/9;
+    overflow:hidden;
+    background:var(--ink);
+  }
+
+  .video-insert .video-frame video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+
+  .video-insert .video-frame::after{
+    content:'';
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(18,17,15,0.05) 0%, rgba(18,17,15,0.35) 100%);
+    pointer-events:none;
+  }
+
+  .video-insert .video-code{
+    position:absolute; top:1.2rem; left:1.2rem;
+    font-family:var(--font-mono);
+    font-size:0.7rem;
+    letter-spacing:1px;
+    color:var(--bone);
+    background:rgba(18,17,15,0.55);
+    padding:0.35rem 0.75rem;
+    z-index:2;
+    display:flex;
+    align-items:center;
+    gap:0.5rem;
+  }
+
+  .video-insert .rec-dot{
+    width:6px; height:6px; border-radius:50%;
+    background:var(--pop-pink);
+    animation:pulse 1.6s infinite ease-in-out;
+  }
+
+  @keyframes pulse{
+    0%, 100%{ opacity:1; }
+    50%{ opacity:0.25; }
+  }
+
+  .video-insert .video-caption{
+    position:absolute; bottom:1.2rem; left:1.2rem; right:1.2rem;
+    z-index:2;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:1rem;
+  }
+
+  .video-insert .video-caption h3{
+    font-family:var(--font-display);
+    font-style:italic;
+    color:var(--bone);
+    font-size:clamp(1.2rem, 2.6vw, 1.9rem);
+  }
+
+  .video-insert .video-toggle{
+    flex-shrink:0;
+    width:44px; height:44px;
+    border:1px solid var(--bone);
+    background:rgba(18,17,15,0.4);
+    color:var(--bone);
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:var(--font-mono);
+    font-size:0.8rem;
+    transition:background 0.3s ease;
+  }
+
+  .video-insert .video-toggle:hover{ background:rgba(18,17,15,0.7); }
+
+  @media (max-width:900px){
+    .video-insert{ padding:0 1.8rem 3rem; }
+    .video-insert .video-caption{ flex-direction:column; align-items:flex-start; gap:0.8rem; }
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:5rem 5.5rem 3rem; display:flex; flex-direction:column; align-items:center; gap:1.4rem;
+    border-top:1px solid rgba(18,17,15,0.12);
+  }
+  .footer-logo{ font-family:var(--font-display); font-style:italic; font-size:1.4rem; transition:color 0.3s ease; }
+  .footer-logo:hover{ color:var(--luminous-blue); }
+  .socials{ display:flex; gap:2rem; }
+  .socials a{
+    font-family:var(--font-mono); font-size:0.72rem; letter-spacing:1.5px;
+    text-transform:uppercase; color:var(--smoke); transition:color 0.3s ease;
+  }
+  .socials a:hover{ color:var(--luminous-blue); }
+  footer p.copyright{ font-family:var(--font-mono); font-size:0.68rem; color:var(--smoke); letter-spacing:0.5px; }
+  footer p.credit{ font-family:var(--font-mono); font-size:0.62rem; color:var(--smoke); letter-spacing:0.5px; opacity:0.75; margin-top:0.4rem; }
+  footer p.credit a{ color:inherit; border-bottom:1px solid currentColor; }
+  @media (max-width:900px){ footer{ padding:4rem 1.8rem 2.5rem; } }
+
+  /* ---------- BACK TO TOP ---------- */
+  .back-to-top{
+    position:fixed; bottom:1.8rem; right:1.8rem; width:42px; height:42px;
+    border:1px solid var(--ink); background:var(--bone); color:var(--ink);
+    font-family:var(--font-mono); font-size:0.85rem;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; opacity:0; pointer-events:none; transform:translateY(8px);
+    transition:opacity 0.35s ease, transform 0.35s ease, background 0.3s ease, color 0.3s ease;
+    z-index:60;
+  }
+  .back-to-top.is-visible{ opacity:0.85; pointer-events:auto; transform:translateY(0); }
+  .back-to-top:hover{ opacity:1; background:var(--ink); color:var(--bone); }
+  @media (max-width:900px){ .back-to-top{ bottom:1.2rem; right:1.2rem; width:38px; height:38px; } }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .color-item{ transition:none; opacity:1; transform:none; }
+    .color-frame{ animation:none; background:#dbe2e7; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="grain"></div>
+
+  <div class="timecode-rail">
+    <span><span class="dot"></span><span id="tc-value">00:00:00:12</span></span>
+  </div>
+
+  <header>
+    <a href="maison-editorial-final.html" class="logo">Home.Sake<small>Éditorial — Paris</small></a>
+    <nav>
+      <ul>
+        <li><a href="maison-editorial-final.html#editorial">Éditorial</a></li>
+        <li><a href="collections.html">Collections</a></li>
+        <li><a href="collections-erosion-ss27.html">Érosion SS27</a></li>
+        <li><a href="collections-ete-2027.html">Été 2027</a></li>
+        <li><a href="couleur-cle-pe27.html" class="active">Couleurs Clés PE27</a></li>
+        <li><a href="vintage.html">Vintage</a></li>
+        <li><a href="making-of.html">Making-Of</a></li>
+        <li><a href="la-maison.html">La Maison</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="color-hero">
+    <p class="kicker">Couleurs Clés — Printemps/Été 2027</p>
+    <h1>Cinq nuances, une même saison.</h1>
+    <p class="hex">Luminous Blue · Pop Pink · Clay · Energy Orange · Meadowland Green</p>
+    <p class="lede">Pas une couleur clé cette saison, mais cinq — chacune assez forte pour porter une capsule à elle seule, assez proches pour composer ensemble sans se contredire.</p>
+  </section>
+
+  <div class="swatch-row">
+    <div class="swatch" style="background:#1D5FD1;"><span style="color:#EFE9DF;">Luminous Blue — #1D5FD1</span></div>
+    <div class="swatch" style="background:#E8447A;"><span style="color:#EFE9DF;">Pop Pink — #E8447A</span></div>
+    <div class="swatch" style="background:#B5652E;"><span style="color:#EFE9DF;">Clay — #B5652E</span></div>
+    <div class="swatch" style="background:#F0611E;"><span style="color:#EFE9DF;">Energy Orange — #F0611E</span></div>
+    <div class="swatch" style="background:#3F7A4E;"><span style="color:#EFE9DF;">Meadowland Green — #3F7A4E</span></div>
+  </div>
+
+  <div class="manifesto">
+    <p>Chaque saison, HOME.SAKE retient un petit nombre de couleurs et les fait circuler d'une capsule à l'autre — jamais comme une règle stricte, plutôt comme une famille de notes qui reviennent. Pour Printemps/Été 2027, cette famille compte cinq nuances.</p>
+    <p class="emphasis">Une couleur clé n'est pas une tendance qu'on suit. C'est une décision qu'on répète jusqu'à ce qu'elle devienne une signature.</p>
+    <p>Chacune des cinq a été tournée seule, sans qu'aucune ne serve de simple satellite aux autres — le bleu ne prépare pas le rose, l'orange ne répond pas au vert. Elles existent chacune à pleine intensité, prêtes à irriguer n'importe quelle capsule à venir.</p>
+  </div>
+
+  <div class="video-insert">
+    <div class="video-border">
+      <div class="video-frame">
+        <span class="video-code"><span class="rec-dot"></span>REC — 00:00:00:00</span>
+        <video id="couleur-video" poster="couleur-luminous-blue.jpg" muted loop playsinline autoplay preload="auto">
+          <source src="couleur-cle-teaser.mp4" type="video/mp4">
+        </video>
+        <div class="video-caption">
+          <h3>Cinq couleurs, une seule bobine</h3>
+          <button class="video-toggle" id="video-toggle-couleur" aria-label="Lecture / Pause">❚❚</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="gallery-heading">
+    <p class="kicker">Les cinq nuances</p>
+    <h2>Chaque couleur, une seule prise — la même lumière dure, le même grain.</h2>
+  </section>
+
+  <div class="color-gallery" id="color-gallery">
+
+    <article class="color-item" data-frame>
+      <div class="color-frame">
+        <img src="couleur-luminous-blue.jpg" alt="Robe satin bleu électrique, portrait en contre-plongée contre un ciel bleu">
+      </div>
+      <p class="item-cat">Luminous Blue — #1D5FD1</p>
+      <h3>Bleu Lumineux</h3>
+    </article>
+
+    <article class="color-item" data-frame>
+      <div class="color-frame">
+        <img src="couleur-pop-pink.jpg" alt="Haut en organza rose vif, portrait souriant en studio">
+      </div>
+      <p class="item-cat">Pop Pink — #E8447A</p>
+      <h3>Rose Éclatant</h3>
+    </article>
+
+    <article class="color-item" data-frame>
+      <div class="color-frame">
+        <img src="couleur-clay.jpg" alt="Robe terracotta nouée, portrait contre un mur de pierre ensoleillé">
+      </div>
+      <p class="item-cat">Clay — #B5652E</p>
+      <h3>Argile</h3>
+    </article>
+
+    <article class="color-item" data-frame>
+      <div class="color-frame">
+        <img src="couleur-energy-orange.jpg" alt="Ensemble orange vif, portrait en mouvement au soleil">
+      </div>
+      <p class="item-cat">Energy Orange — #F0611E</p>
+      <h3>Orange Énergie</h3>
+    </article>
+
+    <article class="color-item" data-frame>
+      <div class="color-frame">
+        <img src="couleur-meadowland-green.jpg" alt="Ensemble satin vert, portrait de dos dans les hautes herbes">
+      </div>
+      <p class="item-cat">Meadowland Green — #3F7A4E</p>
+      <h3>Vert Prairie</h3>
+    </article>
+
+  </div>
+
+  <section class="cta-strip">
+    <h3>Cinq couleurs, plusieurs capsules qui se répondent.</h3>
+    <div class="cta-links">
+      <a href="collections-erosion-ss27.html">Voir Érosion SS27</a>
+      <a href="collections-ete-2027.html">Voir Été 2027</a>
+      <a href="vintage.html">Voir Acapulco.Bikini</a>
+    </div>
+  </section>
+
+  <footer>
+    <a href="maison-editorial-final.html" class="footer-logo">Home.Sake</a>
+    <div class="socials">
+      <a href="#">Instagram</a>
+      <a href="#">Pinterest</a>
+      <a href="#">Journal</a>
+    </div>
+    <p class="copyright">&copy; 2027 HOME.SAKE Éditorial. Tous droits réservés.</p>
+    <p class="credit"><a href="the-studio.html">Direction créative & production visuelle — Stampede Production</a></p>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Remonter en haut de page">↑</button>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Fermer">✕</button>
+    <button class="lightbox-prev" id="lightbox-prev" aria-label="Image précédente">←</button>
+    <img id="lightbox-img" src="" alt="">
+    <p class="lightbox-caption" id="lightbox-caption"></p>
+    <button class="lightbox-next" id="lightbox-next" aria-label="Image suivante">→</button>
+  </div>
+
+  <script>
+    const tc = document.getElementById('tc-value');
+    function formatTC(totalFrames){
+      const fps = 24;
+      const h = String(Math.floor(totalFrames/(fps*3600))).padStart(2,'0');
+      const m = String(Math.floor((totalFrames/(fps*60))%60)).padStart(2,'0');
+      const s = String(Math.floor((totalFrames/fps)%60)).padStart(2,'0');
+      const f = String(Math.floor(totalFrames%fps)).padStart(2,'0');
+      return `${h}:${m}:${s}:${f}`;
+    }
+    function updateTimecode(){
+      const scrollFraction = window.scrollY / (document.body.scrollHeight - window.innerHeight || 1);
+      const totalFrames = Math.floor(scrollFraction * 24 * 240);
+      tc.textContent = formatTC(totalFrames);
+    }
+    window.addEventListener('scroll', updateTimecode, { passive:true });
+    updateTimecode();
+
+    document.querySelectorAll('.color-frame img').forEach(img=>{
+      const frame = img.closest('.color-frame');
+      function markLoaded(){ img.classList.add('is-loaded'); frame.classList.add('img-ready'); }
+      if(img.complete && img.naturalWidth > 0){ markLoaded(); }
+      else { img.addEventListener('load', markLoaded); img.addEventListener('error', markLoaded); }
+    });
+
+    const items = document.querySelectorAll('[data-frame]');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+    }, { threshold:0.15 });
+    items.forEach(p=>io.observe(p));
+
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', ()=>{
+      if(window.scrollY > window.innerHeight * 0.6){ backToTop.classList.add('is-visible'); }
+      else { backToTop.classList.remove('is-visible'); }
+    }, { passive:true });
+    backToTop.addEventListener('click', ()=>{ window.scrollTo({ top:0, behavior:'smooth' }); });
+
+    // Video control
+    const couleurVideo = document.getElementById('couleur-video');
+    const couleurToggle = document.getElementById('video-toggle-couleur');
+    const couleurRec = couleurVideo?.closest('.video-frame')?.querySelector('.video-code');
+    if(couleurVideo && couleurToggle){
+      couleurToggle.addEventListener('click', ()=>{
+        if(couleurVideo.paused){
+          couleurVideo.play();
+          couleurToggle.textContent = '❚❚';
+        } else {
+          couleurVideo.pause();
+          couleurToggle.textContent = '▶';
+        }
+      });
+      couleurVideo.addEventListener('timeupdate', ()=>{
+        if(!couleurRec) return;
+        const t = couleurVideo.currentTime;
+        const m = String(Math.floor(t/60)).padStart(2,'0');
+        const s = String(Math.floor(t%60)).padStart(2,'0');
+        const f = String(Math.floor((t%1)*24)).padStart(2,'0');
+        couleurRec.childNodes[1].textContent = `REC — 00:${m}:${s}:${f}`;
+      });
+    }
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const lightboxPrev = document.getElementById('lightbox-prev');
+    const lightboxNext = document.getElementById('lightbox-next');
+
+    const allItems = Array.from(document.querySelectorAll('.color-item'));
+    const itemsWithImage = allItems.filter(el => el.querySelector('.color-frame img'));
+    const gallery = itemsWithImage.map(el=>{
+      const img = el.querySelector('.color-frame img');
+      const title = el.querySelector('h3');
+      return { src: img?.getAttribute('src'), alt: img?.getAttribute('alt'), title: title?.textContent };
+    });
+
+    let currentIndex = 0;
+    function openLightbox(index){
+      currentIndex = index;
+      const item = gallery[currentIndex];
+      lightboxImg.src = item.src; lightboxImg.alt = item.alt || '';
+      lightboxCaption.textContent = item.title || '';
+      lightbox.classList.add('is-open');
+    }
+    function closeLightbox(){ lightbox.classList.remove('is-open'); }
+    function showRelative(delta){
+      currentIndex = (currentIndex + delta + gallery.length) % gallery.length;
+      openLightbox(currentIndex);
+    }
+    itemsWithImage.forEach((el, index)=>{
+      const frame = el.querySelector('.color-frame');
+      if(frame){ frame.addEventListener('click', ()=>openLightbox(index)); }
+    });
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxPrev.addEventListener('click', ()=>showRelative(-1));
+    lightboxNext.addEventListener('click', ()=>showRelative(1));
+    lightbox.addEventListener('click', (e)=>{ if(e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e)=>{
+      if(!lightbox.classList.contains('is-open')) return;
+      if(e.key === 'Escape') closeLightbox();
+      if(e.key === 'ArrowLeft') showRelative(-1);
+      if(e.key === 'ArrowRight') showRelative(1);
+    });
+  </script>
+
+</body>
+</html>
