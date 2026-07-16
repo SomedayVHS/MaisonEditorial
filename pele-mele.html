@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOME.SAKE — Pêle-Mêle</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="description" content="Pêle-Mêle HOME.SAKE — des prises éparses, sans capsule ni catégorie, avec les prompts qui les ont générées.">
+<meta property="og:title" content="HOME.SAKE — Pêle-Mêle">
+<meta property="og:description" content="Des prises qui n'appartiennent à aucune capsule, gardées quand même.">
+<meta property="og:image" content="pele-mele-06.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  :root{
+    --ink:#12110F;
+    --bone:#EFE9DF;
+    --brass:#9C7A45;
+    --oxblood:#6B2E2A;
+    --smoke:#6E6A62;
+    --font-display:'Bodoni Moda', serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'Space Mono', monospace;
+  }
+
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--bone);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-weight:300;
+    line-height:1.65;
+    overflow-x:hidden;
+  }
+  a{ text-decoration:none; color:inherit; }
+  ::selection{ background:var(--brass); color:var(--bone); }
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--brass); outline-offset:3px; }
+
+  .grain{
+    position:fixed; inset:0; pointer-events:none; z-index:999;
+    opacity:0.05; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  .timecode-rail{
+    position:fixed; left:1.4rem; top:0; height:100vh;
+    display:flex; align-items:center; z-index:50; pointer-events:none;
+  }
+  .timecode-rail span{
+    font-family:var(--font-mono); font-size:0.7rem; letter-spacing:2px;
+    color:var(--ink); opacity:0.55; writing-mode:vertical-rl;
+    transform:rotate(180deg); display:flex; align-items:center; gap:0.6rem;
+  }
+  .timecode-rail .dot{ width:5px; height:5px; border-radius:50%; background:var(--oxblood); writing-mode:horizontal-tb; }
+  @media (max-width:900px){ .timecode-rail{ display:none; } }
+
+  header{
+    padding:2.2rem 4rem 2.2rem 5.5rem;
+    display:flex; justify-content:space-between; align-items:center;
+    color:var(--ink);
+  }
+  .logo{ font-family:var(--font-display); font-style:italic; font-size:1.6rem; letter-spacing:1px; }
+  .logo small{ display:block; font-family:var(--font-mono); font-style:normal; font-size:0.6rem; letter-spacing:4px; opacity:0.55; margin-top:2px; }
+  nav ul{ list-style:none; display:flex; gap:1.6rem; flex-wrap:wrap; justify-content:flex-end; }
+  nav a{
+    font-family:var(--font-mono); font-size:0.66rem; letter-spacing:1.5px;
+    text-transform:uppercase; position:relative; padding-bottom:4px;
+  }
+  nav a.active{ color:var(--oxblood); }
+  nav a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background:currentColor; transition:width 0.35s ease;
+  }
+  nav a:hover::after, nav a.active::after{ width:100%; }
+
+  @media (max-width:900px){
+    header{ flex-direction:column; gap:1.2rem; padding:1.8rem 1.5rem; }
+    nav ul{ gap:1rem; justify-content:center; }
+  }
+
+  .page-header{
+    padding:12rem 5.5rem 4rem;
+    max-width:1000px;
+    margin:0 auto;
+    border-bottom:1px solid rgba(18,17,15,0.12);
+  }
+
+  .page-header .kicker{
+    font-family:var(--font-mono);
+    font-size:0.75rem;
+    letter-spacing:3px;
+    color:var(--oxblood);
+    text-transform:uppercase;
+    margin-bottom:1.2rem;
+    display:flex;
+    align-items:center;
+    gap:0.8rem;
+  }
+  .page-header .kicker::before{ content:''; width:24px; height:1px; background:var(--oxblood); }
+
+  .page-header h1{
+    font-family:var(--font-display);
+    font-style:italic;
+    font-weight:600;
+    font-size:clamp(2.2rem, 5vw, 3.6rem);
+    line-height:1.1;
+    max-width:800px;
+  }
+
+  .page-header p.lede{
+    margin-top:1.6rem;
+    max-width:600px;
+    color:var(--smoke);
+    font-size:1.02rem;
+  }
+
+  @media (max-width:900px){ .page-header{ padding:9rem 1.8rem 3rem; } }
+
+  /* ---------- PELE-MELE GRID ---------- */
+  .pm-grid{
+    max-width:1500px;
+    margin:0 auto;
+    padding:4rem 5.5rem 7rem;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:3.5rem 2.4rem;
+  }
+
+  .pm-item{ opacity:0; transform:translateY(28px); transition:opacity 0.8s ease, transform 0.8s ease; }
+  .pm-item.is-visible{ opacity:1; transform:translateY(0); }
+
+  .pm-frame{
+    position:relative; overflow:hidden; cursor:zoom-in;
+    background:linear-gradient(100deg, #ddd6c8 30%, #e8e2d4 50%, #ddd6c8 70%);
+    background-size:200% 100%;
+    animation:shimmer 1.6s infinite linear;
+    margin-bottom:1rem;
+  }
+  .pm-frame.img-ready{ animation:none; background:none; }
+  @keyframes shimmer{ 0%{ background-position:200% 0; } 100%{ background-position:-200% 0; } }
+
+  .pm-frame img{
+    width:100%; height:100%; display:block; object-fit:cover;
+    aspect-ratio:4/5;
+    filter:grayscale(15%) contrast(1.03);
+    opacity:0;
+    transition:opacity 0.5s ease, filter 0.6s ease, transform 0.6s ease;
+  }
+  .pm-frame img.is-loaded{ opacity:1; }
+  .pm-frame:hover img{ filter:grayscale(0%) contrast(1.06); transform:scale(1.03); }
+
+  .pm-code{
+    position:absolute; top:0.8rem; left:0.8rem;
+    font-family:var(--font-mono); font-size:0.64rem; letter-spacing:1px;
+    color:var(--bone); background:rgba(18,17,15,0.6); padding:0.25rem 0.55rem;
+  }
+
+  .pm-prompt{
+    background:rgba(18,17,15,0.04);
+    border-left:2px solid var(--brass);
+    padding:0.8rem 1rem;
+    font-family:var(--font-mono);
+    font-size:0.7rem;
+    line-height:1.65;
+    color:var(--smoke);
+  }
+
+  @media (max-width:1150px){ .pm-grid{ grid-template-columns:repeat(2, 1fr); } }
+  @media (max-width:900px){ .pm-grid{ grid-template-columns:1fr; padding:3rem 1.8rem 4rem; gap:2.6rem; } }
+
+  /* ---------- LIGHTBOX ---------- */
+  .lightbox{
+    position:fixed; inset:0; background:rgba(18,17,15,0.94); z-index:200;
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; pointer-events:none; transition:opacity 0.3s ease;
+  }
+  .lightbox.is-open{ opacity:1; pointer-events:auto; }
+  .lightbox img{ max-width:min(85vw, 900px); max-height:85vh; object-fit:contain; box-shadow:0 20px 60px rgba(0,0,0,0.5); }
+  .lightbox-caption{
+    position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%);
+    text-align:center; color:var(--bone); font-family:var(--font-display); font-style:italic; font-size:1.1rem;
+  }
+  .lightbox-close, .lightbox-prev, .lightbox-next{
+    position:absolute; background:none; border:1px solid var(--bone); color:var(--bone);
+    cursor:pointer; font-family:var(--font-mono);
+    display:flex; align-items:center; justify-content:center;
+    transition:background 0.3s ease, color 0.3s ease;
+  }
+  .lightbox-close{ top:1.8rem; right:1.8rem; width:42px; height:42px; font-size:1rem; }
+  .lightbox-prev, .lightbox-next{ top:50%; transform:translateY(-50%); width:46px; height:46px; font-size:1.2rem; }
+  .lightbox-prev{ left:1.8rem; } .lightbox-next{ right:1.8rem; }
+  .lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover{ background:var(--bone); color:var(--ink); }
+  @media (max-width:900px){
+    .lightbox img{ max-width:92vw; }
+    .lightbox-prev, .lightbox-next{ width:38px; height:38px; }
+    .lightbox-close{ width:38px; height:38px; top:1.2rem; right:1.2rem; }
+    .lightbox-prev{ left:0.6rem; } .lightbox-next{ right:0.6rem; }
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:5rem 5.5rem 3rem; display:flex; flex-direction:column; align-items:center; gap:1.4rem;
+    border-top:1px solid rgba(18,17,15,0.12);
+  }
+  .footer-logo{ font-family:var(--font-display); font-style:italic; font-size:1.4rem; transition:color 0.3s ease; }
+  .footer-logo:hover{ color:var(--oxblood); }
+  .socials{ display:flex; gap:2rem; }
+  .socials a{
+    font-family:var(--font-mono); font-size:0.72rem; letter-spacing:1.5px;
+    text-transform:uppercase; color:var(--smoke); transition:color 0.3s ease;
+  }
+  .socials a:hover{ color:var(--oxblood); }
+  footer p.copyright{ font-family:var(--font-mono); font-size:0.68rem; color:var(--smoke); letter-spacing:0.5px; }
+  footer p.credit{ font-family:var(--font-mono); font-size:0.62rem; color:var(--smoke); letter-spacing:0.5px; opacity:0.75; margin-top:0.4rem; }
+  footer p.credit a{ color:inherit; border-bottom:1px solid currentColor; }
+  @media (max-width:900px){ footer{ padding:4rem 1.8rem 2.5rem; } }
+
+  /* ---------- BACK TO TOP ---------- */
+  .back-to-top{
+    position:fixed; bottom:1.8rem; right:1.8rem; width:42px; height:42px;
+    border:1px solid var(--ink); background:var(--bone); color:var(--ink);
+    font-family:var(--font-mono); font-size:0.85rem;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; opacity:0; pointer-events:none; transform:translateY(8px);
+    transition:opacity 0.35s ease, transform 0.35s ease, background 0.3s ease, color 0.3s ease;
+    z-index:60;
+  }
+  .back-to-top.is-visible{ opacity:0.85; pointer-events:auto; transform:translateY(0); }
+  .back-to-top:hover{ opacity:1; background:var(--ink); color:var(--bone); }
+  @media (max-width:900px){ .back-to-top{ bottom:1.2rem; right:1.2rem; width:38px; height:38px; } }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .pm-item{ transition:none; opacity:1; transform:none; }
+    .pm-frame{ animation:none; background:#e8e2d4; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="grain"></div>
+
+  <div class="timecode-rail">
+    <span><span class="dot"></span><span id="tc-value">00:00:00:12</span></span>
+  </div>
+
+  <header>
+    <a href="maison-editorial-final.html" class="logo">Home.Sake<small>Éditorial — Paris</small></a>
+    <nav>
+      <ul>
+        <li><a href="maison-editorial-final.html#editorial">Éditorial</a></li>
+        <li><a href="collections.html">Collections</a></li>
+        <li><a href="collections-erosion-ss27.html">Érosion SS27</a></li>
+        <li><a href="collections-ete-2027.html">Été 2027</a></li>
+        <li><a href="couleur-cle-pe27.html">Couleurs Clés PE27</a></li>
+        <li><a href="pele-mele.html" class="active">Pêle-Mêle</a></li>
+        <li><a href="vintage.html">Vintage</a></li>
+        <li><a href="making-of.html">Making-Of</a></li>
+        <li><a href="la-maison.html">La Maison</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <p class="kicker">Archive — Sans capsule</p>
+      <h1>Des prises qui n'appartiennent à aucune saison, gardées quand même.</h1>
+      <p class="lede">Pas de fil conducteur ici, pas de couleur clé, pas de capsule. Juste des essais qu'on a aimés assez pour les garder — chacun avec le prompt qui l'a fait exister.</p>
+    </section>
+
+    <div class="pm-grid" id="pele-mele-grid">
+
+      <article class="pm-item" data-frame>
+        <div class="pm-frame">
+          <span class="pm-code">PM.01</span>
+          <img src="pele-mele-01.jpg" alt="Gros plan visage, cheveux roux, blazer rose, bras levés">
+        </div>
+        <div class="pm-prompt">Cinematic fashion editorial close-up, woman with red hair and freckles lying back with arms raised above her head, wearing a pink blazer, warm intimate lighting, extreme close crop on face and collar, 35mm film grain, shot on Kodak Vision3 250D, 16:9 aspect ratio, no text</div>
+      </article>
+
+      <article class="pm-item" data-frame>
+        <div class="pm-frame">
+          <span class="pm-code">PM.02</span>
+          <img src="pele-mele-02.jpg" alt="Robe satin bleu vif, contre-plongée contre un ciel bleu">
+        </div>
+        <div class="pm-prompt">Cinematic fashion editorial still, low-angle shot of a woman in a vivid blue satin dress, looking back over her shoulder against a bright blue sky and concrete wall, sharp saturated blue color grade, 35mm film grain, shot on Kodak Vision3 250D, 3:4 portrait aspect ratio, no text</div>
+      </article>
+
+      <article class="pm-item" data-frame>
+        <div class="pm-frame">
+          <span class="pm-code">PM.03</span>
+          <img src="pele-mele-03.jpg" alt="Robe terracotta fluide sur une terrasse en pierre">
+        </div>
+        <div class="pm-prompt">Cinematic fashion editorial still, wide shot of a woman in a flowing terracotta dress walking across a sunbaked rooftop terrace, weathered stone walls and distant sea view, warm midday light, 35mm film grain, shot on Kodak Vision3 250D, 16:9 aspect ratio, no text</div>
+      </article>
+
+      <article class="pm-item" data-frame>
+        <div class="pm-frame">
+          <span class="pm-code">PM.04</span>
+          <img src="pele-mele-04.jpg" alt="Maillot orange vif allongée au bord d'une piscine">
+        </div>
+        <div class="pm-prompt">Cinematic fashion editorial still, wide shot of a woman in a vivid orange one-piece swimsuit lying at the edge of a swimming pool, eyes closed, bright midday sunlight, saturated color grade, 35mm film grain, shot on Kodak Vision3 250D, 16:9 aspect ratio, no text</div>
+      </article>
+
+      <article class="pm-item" data-frame>
+        <div class="pm-frame">
+          <span class="pm-code">PM.05</span>
+          <img src="pele-mele-05.jpg" alt="Robe vert prairie dans un champ de blé doré">
+        </div>
+        <div class="pm-prompt">Cinematic fashion editorial still, wide shot of a woman in a flowing meadow green dress standing in a golden wheat field, looking back over her shoulder, open sky and rolling hills in the background, warm natural light, 35mm film grain, shot on Kodak Vision3 250D, 16:9 aspect ratio, no text</div>
+      </article>
+
+      <article class="pm-item" data-frame>
+        <div class="pm-frame">
+          <span class="pm-code">PM.06</span>
+          <img src="pele-mele-06.jpg" alt="Robe rose fluide sur une terrasse dominant une ville côtière">
+        </div>
+        <div class="pm-prompt">Cinematic fashion editorial still, wide shot of a woman in a flowing pink dress with an open back, standing on a rooftop terrace overlooking a coastal city skyline, bright clear sky, warm saturated color grade, 35mm film grain, shot on Kodak Vision3 250D, 16:9 aspect ratio, no text</div>
+      </article>
+
+      <article class="pm-item" data-frame>
+        <div class="pm-frame">
+          <span class="pm-code">PM.07</span>
+          <img src="pele-mele-07.jpg" alt="Robe soie rouille assise près d'une fenêtre aux volets">
+        </div>
+        <div class="pm-prompt">Cinematic fashion editorial still, wide shot of a woman in a rust orange silk dress sitting on the floor beside a shuttered window, warm directional sunlight cutting across the room, quiet contemplative mood, 35mm film grain, shot on Kodak Vision3 250D, 16:9 aspect ratio, no text</div>
+      </article>
+
+      <article class="pm-item" data-frame>
+        <div class="pm-frame">
+          <span class="pm-code">PM.08</span>
+          <img src="pele-mele-08.jpg" alt="Ensemble satin vert dans les hautes herbes, dos échancré">
+        </div>
+        <div class="pm-prompt">Cinematic fashion still, woman wearing a rich meadow green satin garment, standing in tall grass with an open back detail, warm late afternoon light, natural muted green tones, 35mm film grain, shot on Kodak Vision3 250D, 3:4 portrait aspect ratio, no text</div>
+      </article>
+
+      <article class="pm-item" data-frame>
+        <div class="pm-frame">
+          <span class="pm-code">PM.09</span>
+          <img src="pele-mele-09.jpg" alt="Ensemble mesh bleu sur une plage au coucher du soleil, cheveux roux">
+        </div>
+        <div class="pm-prompt">Cinematic fashion editorial still, woman with red hair walking along a sunset beach wearing a sheer blue mesh tank and wrap skirt, warm backlight glowing through the fabric, candid mid-stride pose, 35mm film grain, shot on Kodak Vision3 250D, 3:4 portrait aspect ratio, no text</div>
+      </article>
+
+    </div>
+  </main>
+
+  <footer>
+    <a href="maison-editorial-final.html" class="footer-logo">Home.Sake</a>
+    <div class="socials">
+      <a href="#">Instagram</a>
+      <a href="#">Pinterest</a>
+      <a href="#">Journal</a>
+    </div>
+    <p class="copyright">&copy; 2027 HOME.SAKE Éditorial. Tous droits réservés.</p>
+    <p class="credit"><a href="the-studio.html">Direction créative & production visuelle — Stampede Production</a></p>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Remonter en haut de page">↑</button>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Fermer">✕</button>
+    <button class="lightbox-prev" id="lightbox-prev" aria-label="Image précédente">←</button>
+    <img id="lightbox-img" src="" alt="">
+    <p class="lightbox-caption" id="lightbox-caption"></p>
+    <button class="lightbox-next" id="lightbox-next" aria-label="Image suivante">→</button>
+  </div>
+
+  <script>
+    const tc = document.getElementById('tc-value');
+    function formatTC(totalFrames){
+      const fps = 24;
+      const h = String(Math.floor(totalFrames/(fps*3600))).padStart(2,'0');
+      const m = String(Math.floor((totalFrames/(fps*60))%60)).padStart(2,'0');
+      const s = String(Math.floor((totalFrames/fps)%60)).padStart(2,'0');
+      const f = String(Math.floor(totalFrames%fps)).padStart(2,'0');
+      return `${h}:${m}:${s}:${f}`;
+    }
+    function updateTimecode(){
+      const scrollFraction = window.scrollY / (document.body.scrollHeight - window.innerHeight || 1);
+      const totalFrames = Math.floor(scrollFraction * 24 * 240);
+      tc.textContent = formatTC(totalFrames);
+    }
+    window.addEventListener('scroll', updateTimecode, { passive:true });
+    updateTimecode();
+
+    document.querySelectorAll('.pm-frame img').forEach(img=>{
+      const frame = img.closest('.pm-frame');
+      function markLoaded(){ img.classList.add('is-loaded'); frame.classList.add('img-ready'); }
+      if(img.complete && img.naturalWidth > 0){ markLoaded(); }
+      else { img.addEventListener('load', markLoaded); img.addEventListener('error', markLoaded); }
+    });
+
+    const items = document.querySelectorAll('[data-frame]');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+    }, { threshold:0.15 });
+    items.forEach(p=>io.observe(p));
+
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', ()=>{
+      if(window.scrollY > window.innerHeight * 0.6){ backToTop.classList.add('is-visible'); }
+      else { backToTop.classList.remove('is-visible'); }
+    }, { passive:true });
+    backToTop.addEventListener('click', ()=>{ window.scrollTo({ top:0, behavior:'smooth' }); });
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const lightboxPrev = document.getElementById('lightbox-prev');
+    const lightboxNext = document.getElementById('lightbox-next');
+
+    const allItems = Array.from(document.querySelectorAll('.pm-item'));
+    const gallery = allItems.map(el=>{
+      const img = el.querySelector('.pm-frame img');
+      const code = el.querySelector('.pm-code');
+      return { src: img?.getAttribute('src'), alt: img?.getAttribute('alt'), title: code?.textContent };
+    }).filter(item=>item.src);
+
+    let currentIndex = 0;
+    function openLightbox(index){
+      currentIndex = index;
+      const item = gallery[currentIndex];
+      lightboxImg.src = item.src; lightboxImg.alt = item.alt || '';
+      lightboxCaption.textContent = item.title || '';
+      lightbox.classList.add('is-open');
+    }
+    function closeLightbox(){ lightbox.classList.remove('is-open'); }
+    function showRelative(delta){
+      currentIndex = (currentIndex + delta + gallery.length) % gallery.length;
+      openLightbox(currentIndex);
+    }
+    allItems.forEach((el, index)=>{
+      const frame = el.querySelector('.pm-frame');
+      if(frame){ frame.addEventListener('click', ()=>openLightbox(index)); }
+    });
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxPrev.addEventListener('click', ()=>showRelative(-1));
+    lightboxNext.addEventListener('click', ()=>showRelative(1));
+    lightbox.addEventListener('click', (e)=>{ if(e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e)=>{
+      if(!lightbox.classList.contains('is-open')) return;
+      if(e.key === 'Escape') closeLightbox();
+      if(e.key === 'ArrowLeft') showRelative(-1);
+      if(e.key === 'ArrowRight') showRelative(1);
+    });
+  </script>
+
+</body>
+</html>
